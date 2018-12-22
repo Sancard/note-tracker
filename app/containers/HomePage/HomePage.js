@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TaskCard from '../../components/TaskCard/TaskCard';
 import * as styles from './HomePage.css';
+import { getTask } from '../../utils/storage';
 
 type Props = {
   tasks: {
@@ -13,10 +14,15 @@ type Props = {
 class HomePage extends Component<Props> {
   props: Props;
 
+
+  openTask = (key) => {
+    console.log(getTask(key))
+  };
+
   render() {
     const tasks = this.props.tasks.tasks.map((task, index) =>
       (
-        <TaskCard key={index} name={task.name} desc={task.desc} time={task.time}/>
+        <TaskCard key={index} click={() => this.openTask(task.name)} name={task.name} desc={task.desc} time={task.time}/>
       )
     );
 

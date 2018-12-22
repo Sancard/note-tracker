@@ -6,25 +6,28 @@
   color: white;
 }
 
-.form input, .form textarea {
+.form input,
+.form textarea {
   width: 100%;
+  resize: none;
   padding: 10px;
-  background-color: #46567F;
+  background-color: #46567f;
   border: none;
   border-radius: 2px;
   color: white;
   margin: 10px 0;
   font-family: inherit;
 }
-.form input::placeholder, .form textarea::placeholder {
+.form input::placeholder,
+.form textarea::placeholder {
   color: #ccc;
 }
 
 .form button {
-  outline:none;
+  outline: none;
   padding: 15px 20px;
   border: none;
-  background-color: #2E3854;
+  background-color: #2e3854;
   color: white;
   text-transform: uppercase;
   box-shadow: 10px 0 54px -14px rgba(0, 0, 0, 0.75);

@@ -21,14 +21,16 @@ class Header extends React.Component<Props> {
 
   onBrandClick = () => {
     this.props.history.push('/');
-  }
+  };
 
   render() {
     const createButton = this.props.location.pathname === '/taskcreator' ? null :
       <button type="button" className={styles.add} onClick={this.onCreateNewTask}>+ Create new task</button>;
     return (
       <div className={styles.header}>
-        <button type="button" className={styles.add} onClick={this.props.location.pathname !== '/' ? this.onBrandClick : null}>Note Tracker</button>
+        <button type="button" className={styles.add}
+                onClick={this.props.location.pathname !== '/' ? this.onBrandClick : null}>Note Tracker
+        </button>
         {createButton}
       </div>
     );

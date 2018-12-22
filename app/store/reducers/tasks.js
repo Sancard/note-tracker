@@ -1,14 +1,18 @@
 import { TASK_NEW_TASK } from '../actions/actionTypes';
+import { saveTask, taskStore, convertValues } from '../../utils/storage';
 
 const initialState = {
-  tasks: []
+  tasks: taskStore.store ? convertValues(taskStore.store) : []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case TASK_NEW_TASK: {
       const tasks = state.tasks.concat(action.task);
-      return {...state, tasks};
+      // save data to file
+      saveTask(action.task.name, action.task );
+      // return state to redux store
+      return { ...state, tasks };
     }
     default: {
       return state;

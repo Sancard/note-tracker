@@ -1,12 +1,36 @@
 .taskCard {
   margin: 15px;
-  width: 225px;
-  height: 150px;
+  width: 300px;
+  height: 200px;
   padding: 15px;
   border-radius: 3px;
-  background-color: #46567F;
-  box-shadow: 10px 0 54px -14px rgba(0,0,0,0.75);
+  background-color: #46567f;
+  box-shadow: 10px 0 54px -14px rgba(0, 0, 0, 0.75);
+}
+.taskCard h3 {
+  margin: 5px 0;
+  font-size: 20px;
+}
+.sectionTitle {
+  color: gainsboro;
+  font-style: italic;
+  font-size: 10px;
 }
 .taskCard p {
+  font-size: 10px;
   margin: 2px;
+}
+.menu {
+  float: right;
+  color: #ddd;
+  margin-top: 30px;
+  cursor: pointer;
+}
+.menu:hover i {
+  color: #8dadff;
+}
+.description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

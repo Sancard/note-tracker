@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as styles from './TaskCreator.css';
-import { taskNewTask } from '../../actions';
+import { taskNewTask } from '../../store/actions';
 
 type Props = {
   history: {
