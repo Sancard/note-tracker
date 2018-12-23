@@ -7,3 +7,20 @@
   padding: 10px;
   font-size: 20px;
 }
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+.actionButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 25px;
+  cursor: pointer;
+}
+.actionButton:hover {
+  color: #4ecca3;
+}

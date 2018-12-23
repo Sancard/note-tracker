@@ -101,14 +101,14 @@
     },
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate",
-      "private": false
+      "owner": "",
+      "repo": "",
+      "private": true
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+    "url": ""
   },
   "author": {
     "name": "Note Tracker",
@@ -138,7 +138,7 @@
     "to do",
     "javascript"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
