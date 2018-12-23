@@ -7,14 +7,3 @@
   padding: 10px;
   font-size: 20px;
 }
-
-.add {
-  outline:none;
-  cursor: pointer;
-  padding: 20px 45px;
-  border: none;
-  background-color: #2E3854;
-  color: white;
-  text-transform: uppercase;
-  box-shadow: 10px 0 54px -14px rgba(0, 0, 0, 0.75);
-}

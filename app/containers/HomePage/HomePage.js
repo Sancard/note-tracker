@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TaskCard from '../../components/TaskCard/TaskCard';
 import * as styles from './HomePage.css';
-import { getTask } from '../../utils/storage';
+import routes from '../../constants/routes';
 
 type Props = {
   tasks: {
@@ -16,13 +16,14 @@ class HomePage extends Component<Props> {
 
 
   openTask = (key) => {
-    console.log(getTask(key))
+    this.props.history.push(routes.TASK +'?uuid=' + key);
   };
 
   render() {
     const tasks = this.props.tasks.tasks.map((task, index) =>
       (
-        <TaskCard key={index} click={() => this.openTask(task.name)} name={task.name} desc={task.desc} time={task.time}/>
+        <TaskCard key={index} click={() => this.openTask(task.uuid)} name={task.name} description={task.description}
+                  estimatedHours={task.estimatedHours} loggedTime={task.loggedTime} />
       )
     );
 

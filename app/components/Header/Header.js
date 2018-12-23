@@ -2,6 +2,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styles from './Header.css';
+import NoteButton from '../NoteButton/NoteButton';
 
 type Props = {
   history: {
@@ -25,12 +26,10 @@ class Header extends React.Component<Props> {
 
   render() {
     const createButton = this.props.location.pathname === '/taskcreator' ? null :
-      <button type="button" className={styles.add} onClick={this.onCreateNewTask}>+ Create new task</button>;
+      <NoteButton onClick={this.onCreateNewTask}>+ Create new task</NoteButton>;
     return (
       <div className={styles.header}>
-        <button type="button" className={styles.add}
-                onClick={this.props.location.pathname !== '/' ? this.onBrandClick : null}>Note Tracker
-        </button>
+        <NoteButton padding="20px 73px" onClick={this.props.location.pathname !== '/' ? this.onBrandClick : null}>Note Tracker</NoteButton>
         {createButton}
       </div>
     );

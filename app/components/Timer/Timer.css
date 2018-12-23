@@ -1,0 +1,16 @@
+.timer {
+  font-size: 35px;
+  color: white;
+  text-align: center;
+}
+.controls {
+  margin: 10px;
+  font-size: 15px;
+}
+.controls i {
+  cursor: pointer;
+  color: #ccc;
+}
+.controls i:hover {
+  color: #8dadff;
+}

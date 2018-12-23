@@ -1,1 +1,2 @@
 export const TASK_NEW_TASK = "TASK_NEW_TASK";
+export const TASK_UPDATE_TASK = "TASK_UPDATE_TASK";

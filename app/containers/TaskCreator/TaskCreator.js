@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as styles from './TaskCreator.css';
 import { taskNewTask } from '../../store/actions';
+import { guidGenerator } from '../../utils/utilities';
+import NoteButton from '../../components/NoteButton/NoteButton';
 
 type Props = {
   history: {
@@ -15,9 +17,11 @@ class TaskCreator extends Component<Props> {
   props: Props;
 
   state = {
+    uuid: guidGenerator(),
     name: '',
-    time: null,
-    desc: '',
+    estimatedHours: null,
+    description: '',
+    createdAt: Date.now(),
     valid: false
   };
 
@@ -33,7 +37,7 @@ class TaskCreator extends Component<Props> {
     const { target } = event;
     this.setState({ [target.name]: target.value });
 
-    if (this.state.name && this.state.time && this.state.desc) {
+    if (this.state.name && this.state.estimatedHours && this.state.description) {
       this.setState((prevState) => ({
         ...prevState,
         valid: true
@@ -60,15 +64,15 @@ class TaskCreator extends Component<Props> {
         </div>
         <div>
           <input type="number"
-                 name="time"
+                 name="estimatedHours"
                  required
                  onChange={this.handleInputChange}
                  placeholder="Enter estimated hours"/>
         </div>
         <div>
-          <textarea required placeholder="Task description" name="desc" onChange={this.handleInputChange}/>
+          <textarea required placeholder="Task description" name="description" onChange={this.handleInputChange}/>
         </div>
-        <button disabled={!this.state.valid} type="button" onClick={this.onCreateTask}>Create a task</button>
+        <NoteButton disabled={!this.state.valid} type="button" onClick={this.onCreateTask}>Create a task</NoteButton>
       </form>
     );
   }

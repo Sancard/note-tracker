@@ -1,0 +1,15 @@
+.button {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background-color: #2e3854;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: 10px 0 54px -14px rgba(0, 0, 0, 0.75);
+}
+.button:disabled,
+.button[disabled] {
+  cursor: not-allowed;
+  color: black;
+  background-color: #eee;
+}

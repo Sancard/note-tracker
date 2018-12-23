@@ -3,16 +3,17 @@
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import "~@fortawesome/fontawesome-free/css/all.css";
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
-body, html {
+body,
+html {
   position: relative;
   color: white;
   height: 100%;
   font-family: 'Open Sans', sans-serif;
   background-color: #283149;
-  overflow-y: hidden;
+  overflow: hidden;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-
