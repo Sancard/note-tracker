@@ -44,7 +44,7 @@ class Task extends Component<Props> {
   }
 
   sanitizeConf = {
-    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'img', 'br'],
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'img', 'br', 'div'],
     allowedAttributes: { a: ['href'], img: ['src'] }
   };
 
