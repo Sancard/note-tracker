@@ -34,6 +34,11 @@ class Header extends React.Component<Props> {
     electron.remote.getCurrentWindow().minimize();
   };
 
+  maximizeApp = () => {
+    electron.remote.getCurrentWindow().isMaximized() ? electron.remote.getCurrentWindow().unmaximize() :
+      electron.remote.getCurrentWindow().maximize();
+  };
+
 
   render() {
     const createButton = this.props.location.pathname === '/taskcreator' ? null :
@@ -46,7 +51,10 @@ class Header extends React.Component<Props> {
           {createButton}
         </div>
         <div className={styles.actionButtons}>
-          <div className={styles.actionButton} onClick={this.minimizeApp}><i className="fas fa-window-minimize"></i></div>
+          <div className={styles.actionButton} onClick={this.minimizeApp}><i className="fas fa-window-minimize"></i>
+          </div>
+          <div className={styles.actionButton} onClick={this.maximizeApp}><i className="fas fa-window-maximize"></i>
+          </div>
           <div className={styles.actionButton} onClick={this.closeApp}><i className="fas fa-times"></i></div>
         </div>
       </div>

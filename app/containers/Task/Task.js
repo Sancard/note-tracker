@@ -1,7 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getTask} from '../../utils/storage';
+import ContentEditable from 'react-contenteditable';
+import sanitizeHtml from 'sanitize-html';
+import { getTask } from '../../utils/storage';
 import Timer from '../../components/Timer/Timer';
 import { updateTask } from '../../store/actions';
 import * as styles from './Task.css';
@@ -25,7 +27,6 @@ class Task extends Component<Props> {
       notes: '',
       loggedTime: 0
     }
-
   };
 
   componentWillMount() {
@@ -42,17 +43,31 @@ class Task extends Component<Props> {
     this.saveData();
   }
 
+  sanitizeConf = {
+    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'img', 'br'],
+    allowedAttributes: { a: ['href'], img: ['src'] }
+  };
+
   handleInputChange = (event) => {
     const { target } = event;
+
     this.setState((prevState) => {
       return {
-        task: { ...prevState.task, notes: target.value }
+        task: { ...prevState.task, notes: target.value ? target.value : '' }
       };
     });
   };
 
   saveData = () => {
     this.props.updateTask(this.state.task);
+  };
+
+  sanitize = () => {
+    this.setState((prevState) => {
+      return {
+        task: { ...prevState.task, notes: sanitizeHtml(prevState.task.notes, this.sanitizeConf) }
+      };
+    });
   };
 
   loggedTimeHandler = (seconds) => {
@@ -79,8 +94,15 @@ class Task extends Component<Props> {
           <h3 className={styles.desc}>{this.state.task.description}</h3>
         </div>
         <div className={styles.editor}>
-          <textarea placeholder="Your thoughts..." value={this.state.task.notes} name="notes"
-                    onChange={this.handleInputChange} onBlur={this.saveData}/>
+          <ContentEditable
+            innerRef={this.contentEditable}
+            html={this.state.task.notes} // innerHTML of the editable div
+            disabled={false}       // use true to disable editing
+            onChange={this.handleInputChange} // handle innerHTML change
+            className={styles.area}
+            tagName="pre"
+            onBlur={this.sanitize}
+          />
         </div>
       </div>
     );
