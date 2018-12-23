@@ -23,7 +23,8 @@ class TaskCreator extends Component<Props> {
     description: '',
     loggedTime: 0,
     createdAt: Date.now(),
-    valid: false
+    valid: false,
+    notes: ''
   };
 
   onCreateTask = () => {

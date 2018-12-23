@@ -65,7 +65,7 @@ class Task extends Component<Props> {
   sanitize = () => {
     this.setState((prevState) => {
       return {
-        task: { ...prevState.task, notes: sanitizeHtml(prevState.task.notes, this.sanitizeConf) }
+        task: { ...prevState.task, notes: prevState.task.notes ? sanitizeHtml(prevState.task.notes, this.sanitizeConf) : '' }
       };
     });
   };
