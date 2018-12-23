@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import * as styles from './Task.css';
-import { getTask, saveTask } from '../../utils/storage';
+import { connect } from 'react-redux';
+import { getTask} from '../../utils/storage';
 import Timer from '../../components/Timer/Timer';
 import { updateTask } from '../../store/actions';
-import { connect } from 'react-redux';
+import * as styles from './Task.css';
 
 
 type Props = {

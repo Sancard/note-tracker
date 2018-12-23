@@ -30,7 +30,7 @@ class HomePage extends Component<Props> {
     return (
       <React.Fragment>
         <div className={styles.tasksGrid}>
-          {tasks}
+          {tasks.length > 0 ? tasks.reverse() : <p className={styles.emptyTasks}>No tasks found. Hurry up and create some!</p>}
         </div>
       </React.Fragment>
     );
