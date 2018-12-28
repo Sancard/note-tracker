@@ -2,16 +2,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TaskCard from '../../components/TaskCard/TaskCard';
-import * as styles from './HomePage.css';
+import * as styles from './Tasks.css';
 import routes from '../../constants/routes';
 
 type Props = {
   tasks: {
     tasks: Array
   },
+  history: {
+    push: () => void
+  }
 };
 
-class HomePage extends Component<Props> {
+class Tasks extends Component<Props> {
   props: Props;
 
 
@@ -43,4 +46,4 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(
-  mapStateToProps, null)(HomePage);
+  mapStateToProps, null)(Tasks);

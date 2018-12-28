@@ -25,13 +25,16 @@
 }
 .editor {
   width: 100%;
-  max-width: 100%
+  max-width: 100%;
 }
 .editor .area {
+  white-space: pre-wrap;
+  word-wrap: break-word;
   margin: 0;
   font-family: inherit;
   width: 84vw;
   height: 93vh;
+  overflow-x: hidden;
   overflow-y: auto;
   resize: none;
   background-color: #2c2828;
@@ -49,4 +52,18 @@
   font-size: 50px;
   text-align: center;
   margin: 10px 0;
+}
+.loggedDays {
+  overflow: auto;
+  max-height: 50%;
+}
+.loggedDays > p {
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+  border-top: 1px solid #2e3854;
+  border-bottom: 1px solid #2e3854;
+}
+.loggedDays > p:first-of-type {
+  display: none;
 }

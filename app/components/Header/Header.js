@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import moment from "moment";
 import electron from 'electron';
 import styles from './Header.css';
 import NoteButton from '../NoteButton/NoteButton';
@@ -49,6 +50,9 @@ class Header extends React.Component<Props> {
           <NoteButton padding="20px 73px" onClick={this.props.location.pathname !== '/' ? this.onBrandClick : null}>Note
             Tracker</NoteButton>
           {createButton}
+        </div>
+        <div className={styles.currentDate}>
+          {moment().format('D. MMM Y')}
         </div>
         <div className={styles.actionButtons}>
           <div className={styles.actionButton} onClick={this.minimizeApp}><i className="fas fa-window-minimize"></i>
