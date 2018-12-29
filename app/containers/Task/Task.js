@@ -92,19 +92,20 @@ class Task extends Component<Props> {
   handleTab = (e) => {
     if (e.key === 'Tab') {
       e.preventDefault();
-      this.setState((prevState) => {
+      // TODO: Implementing tab later
+      /*this.setState((prevState) => {
         return {
           task: { ...prevState.task, notes: `${prevState.task.notes}    ` }
         };
       });
       setTimeout(() => {
         this.setCursorAtEnd();
-      });
+      });*/
     }
   };
 
 
-  setCursorAtEnd = (el = this.editorRef.current) => {
+  /*setCursorAtEnd = (el = this.editorRef.current) => {
     const range = document.createRange();
     const sel = window.getSelection();
     range.selectNodeContents(el);
@@ -112,7 +113,7 @@ class Task extends Component<Props> {
     sel.removeAllRanges();
     sel.addRange(range);
     el.focus();
-  };
+  };*/
 
   loggedTimeHandler = (seconds) => {
     this.setState((prevState) => {

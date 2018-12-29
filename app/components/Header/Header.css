@@ -28,7 +28,11 @@
   color: #4ecca3;
 }
 .currentDate {
-  font-size: 25px;
   text-align: center;
-  margin-top:10px;
+  margin-top: 6px;
+}
+.currentDate p {
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
 }

@@ -17,6 +17,18 @@ type Props = {
 
 class Header extends React.Component<Props> {
 
+  state = {
+    currentTime: moment().format('H:mm:ss')
+  };
+
+
+  componentDidMount() {
+    setInterval(() =>{
+      this.setState({currentTime: moment().format('H:mm:ss')});
+    }, 1000);
+  }
+
+
   onCreateNewTask = () => {
     this.props.history.push('/taskcreator');
   };
@@ -48,7 +60,8 @@ class Header extends React.Component<Props> {
             Tracker</NoteButton>
         </div>
         <div className={styles.currentDate}>
-          {moment().format('D. MMM Y')}
+          <p>{moment().format('D. MMM Y')}</p>
+          <p>{this.state.currentTime}</p>
         </div>
         <div className={styles.actionButtons}>
           <div className={styles.actionButton} onClick={this.minimizeApp}><i className="fas fa-window-minimize"></i>
