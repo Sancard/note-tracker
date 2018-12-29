@@ -1,13 +1,36 @@
 
 .tasksGrid {
   width: 100%;
-  height: 92vh;
+  height: 75vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 250px;
-  overflow-y: auto;
+  overflow-y: scroll;
   box-sizing:inherit;
 }
+.taskTable {
+  width: 100%;
+  height: 75vh;
+  box-sizing:inherit;
+  overflow-y: auto;
+}
 .emptyTasks {
-  text-align: center;
+  padding: 10px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.buttons button {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 20px;
+  padding: 0 20px;
+  cursor: pointer;
+  outline: none;
+}
+.buttons button:hover {
+  color: #46567f;
 }

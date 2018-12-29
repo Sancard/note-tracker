@@ -94,7 +94,7 @@ class Task extends Component<Props> {
       e.preventDefault();
       this.setState((prevState) => {
         return {
-          task: { ...prevState.task, notes: `${prevState.task.notes}    `}
+          task: { ...prevState.task, notes: `${prevState.task.notes}    ` }
         };
       });
       setTimeout(() => {
@@ -130,9 +130,22 @@ class Task extends Component<Props> {
   render() {
     let loggedTime = null;
     if (Object.entries(this.state.task.loggedTime).length > 0) {
-      loggedTime = Object.entries(this.state.task.loggedTime).map((el, index) => {
+      // sort dates properly
+      loggedTime = Object.entries(this.state.task.loggedTime).sort((a,b) => {
+        const _a = moment((a[0]), 'D-M-Y').toDate();
+        const _b = moment(b[0], 'D-M-Y').toDate();
+
+        if(_a < _b) {
+          return 1;
+        } else if (_a > _b) {
+          return -1;
+        }
+        return 0
+      });
+      // create elements
+      loggedTime = loggedTime.map((el, index) => {
         return (
-          <p key={index}>{el[0].replace(/-/g, '.')} : {moment.utc(el[1] * 1000).format('HH:mm:ss')}</p>
+          <p key={index}>{el[0].replace(/-/g, '.')} • {moment.utc(el[1] * 1000).format('HH:mm:ss')}</p>
         );
       });
     }

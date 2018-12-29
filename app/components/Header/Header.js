@@ -18,7 +18,6 @@ type Props = {
 class Header extends React.Component<Props> {
 
   onCreateNewTask = () => {
-    console.log(this.props);
     this.props.history.push('/taskcreator');
   };
 
@@ -42,14 +41,11 @@ class Header extends React.Component<Props> {
 
 
   render() {
-    const createButton = this.props.location.pathname === '/taskcreator' ? null :
-      <NoteButton onClick={this.onCreateNewTask}>+ Create new task</NoteButton>;
     return (
       <div className={styles.header}>
         <div>
           <NoteButton padding="20px 73px" onClick={this.props.location.pathname !== '/' ? this.onBrandClick : null}>Note
             Tracker</NoteButton>
-          {createButton}
         </div>
         <div className={styles.currentDate}>
           {moment().format('D. MMM Y')}
