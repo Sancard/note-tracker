@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import moment from 'moment';
 import styles from './TaskCard.css';
+import { sumLoggedTime } from '../../utils/utilities';
 
 type Props = {
   name: string,
@@ -11,19 +11,14 @@ type Props = {
   loggedTime: []
 };
 
-function formatTime(times) {
-  const sum = Object.values(times).reduce((a, b) => {
-    return a + b;
-  }, 0);
-  return moment.utc(sum * 1000).format('HH:mm:ss');
-}
+
 
 const TaskCard = (props: Props) => {
   return (
     <div onClick={props.click} className={styles.taskCard}>
       <h3>{props.name}</h3>
       <span className={styles.sectionTitle}>Logged:</span>
-      <p>{formatTime(props.loggedTime)}</p>
+      <p>{sumLoggedTime(props.loggedTime)}</p>
       <span className={styles.sectionTitle}>Estimated:</span>
       <p>{props.estimatedHours} hours</p>
       <span className={styles.sectionTitle}>Description:</span>

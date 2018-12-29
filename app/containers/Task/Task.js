@@ -8,6 +8,7 @@ import { getTask } from '../../utils/storage';
 import Timer from '../../components/Timer/Timer';
 import { updateTask } from '../../store/actions';
 import * as styles from './Task.css';
+import { sumLoggedTime } from '../../utils/utilities';
 
 type Props = {
   location: {
@@ -161,6 +162,8 @@ class Task extends Component<Props> {
           <h3>{this.state.task.name}</h3>
           <span>Estimated:</span>
           <h3>{this.state.task.estimatedHours} hours</h3>
+          <span>Logged time:</span>
+          <h3>{sumLoggedTime(this.state.task.loggedTime)}</h3>
           <span>Description:</span>
           <h3 className={styles.desc}>{this.state.task.description}</h3>
         </div>

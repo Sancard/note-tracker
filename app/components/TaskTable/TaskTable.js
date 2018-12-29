@@ -1,6 +1,6 @@
 import React from 'react';
-import moment from "moment";
 import * as styles from './TaskTable.css';
+import { sumLoggedTime } from '../../utils/utilities';
 
 type Props = {
   tasks: Array<{
@@ -10,21 +10,13 @@ type Props = {
   click: () => void
 };
 
-function formatTime(times) {
-  const sum = Object.values(times).reduce((a, b) => {
-    return a + b;
-  }, 0);
-  return moment.utc(sum * 1000).format('HH:mm:ss');
-}
-
-
 const MyComponent = (props: Props) => {
   const tasks = props.tasks.map((el, index) => {
     return (
       <tr key={index} onClick={() => props.click(el.uuid)}>
         <td>{el.name}</td>
         <td>{el.estimatedHours} hours</td>
-        <td>{formatTime(el.loggedTime)}</td>
+        <td>{sumLoggedTime(el.loggedTime)}</td>
         <td className={styles.descOverflow}>{el.description}</td>
       </tr>
     );
