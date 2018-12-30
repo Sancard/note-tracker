@@ -2,9 +2,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
+import { connect } from 'react-redux';
 import electron from 'electron';
 import styles from './Header.css';
 import * as routes from '../../constants/routes';
+import { appUpdateProjectUuid } from '../../store/actions';
 
 type Props = {
   history: {
@@ -12,7 +14,8 @@ type Props = {
   },
   location: {
     pathname: string
-  }
+  },
+  updateProjectUuid: () => void
 };
 
 class Header extends React.Component<Props> {
@@ -45,6 +48,7 @@ class Header extends React.Component<Props> {
 
   onBrandClick = () => {
     if(this.props.location.pathname !== '/') {
+      this.props.updateProjectUuid(null);
       this.props.history.push('/');
     }
   };
@@ -87,7 +91,12 @@ class Header extends React.Component<Props> {
       </div>
     );
   }
-
 }
 
-export default withRouter(Header);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateProjectUuid: (projectUuid) => dispatch(appUpdateProjectUuid(projectUuid))
+  }
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(Header));

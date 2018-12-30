@@ -5,6 +5,7 @@ import TaskCard from '../../components/TaskCard/TaskCard';
 import * as styles from './Viewer.css';
 import routes from '../../constants/routes';
 import TaskTable from '../../components/TaskTable/TaskTable';
+import { appUpdateProjectUuid } from '../../store/actions';
 
 type Props = {
   tasks: {
@@ -15,7 +16,11 @@ type Props = {
   },
   history: {
     push: () => void
-  }
+  },
+  appState: {
+    projectUuid: string
+  },
+  updateProjectUuid: () => void
 };
 
 class Viewer extends Component<Props> {
@@ -28,21 +33,32 @@ class Viewer extends Component<Props> {
     projectUuid: null
   };
 
+
   componentWillMount() {
-    this.setState({ data: this.props.projects.projects });
+    if (this.props.appState.projectUuid) {
+      this.setState({ isProjects: false, data: this.setData(this.props.appState.projectUuid), projectUuid: this.props.appState.projectUuid });
+    } else {
+      this.setState({ data: this.props.projects.projects });
+    }
   }
 
   onSelectedRow = (key) => {
     if (this.state.isProjects) {
 
-      const data = this.props.tasks.tasks.filter((el) => {
-        return el.projectUuid === key;
-      });
+      this.props.updateProjectUuid(key);
+
+      const data = this.setData(key);
 
       this.setState({ isProjects: false, data, projectUuid: key });
     } else {
       this.props.history.push(routes.TASK + '?uuid=' + key);
     }
+  };
+
+  setData = (key) => {
+    return this.props.tasks.tasks.filter((el) => {
+      return el.projectUuid === key;
+    });
   };
 
   toggleStyle = () => {
@@ -62,6 +78,7 @@ class Viewer extends Component<Props> {
   };
 
   onBack = () => {
+    this.props.updateProjectUuid(null);
     this.setState({ isProjects: true, data: this.props.projects.projects });
   };
 
@@ -69,14 +86,14 @@ class Viewer extends Component<Props> {
     let tasksCard, taskGrid, taskTable;
 
     // create view based on state
-    if(this.state.listStyle) {
+    if (this.state.listStyle) {
       taskTable = <div className={styles.taskTable}>
         <TaskTable isProjects={this.state.isProjects} data={this.state.data} click={this.onSelectedRow}/>
       </div>;
-    }  else { // grid style
+    } else { // grid style
       tasksCard = this.state.data.map((el, index) =>
         (
-          <TaskCard {...el} isProjects={this.state.isProjects} key={index} click={() => this.onSelectedRow(el.uuid)} />
+          <TaskCard {...el} isProjects={this.state.isProjects} key={index} click={() => this.onSelectedRow(el.uuid)}/>
         )
       );
       taskGrid = <div className={styles.tasksGrid}>{tasksCard.length > 0 ? tasksCard.reverse() : <p
@@ -109,8 +126,16 @@ class Viewer extends Component<Props> {
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasksStore,
-    projects: state.projectsStore
+    projects: state.projectsStore,
+    appState: state.appStore
   };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateProjectUuid: (projectUuid) => dispatch(appUpdateProjectUuid(projectUuid))
+  };
+};
+
 export default connect(
-  mapStateToProps, null)(Viewer);
+  mapStateToProps, mapDispatchToProps)(Viewer);
