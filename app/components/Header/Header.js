@@ -70,9 +70,12 @@ class Header extends React.Component<Props> {
   render() {
     return (
       <div className={styles.header}>
-        <div className={styles.currentDate}>
-          <p>{moment().format('D. MMM Y')}</p>
-          <p>{this.state.currentTime}</p>
+        <div className={styles.mainButton}>
+          <button type="button" disabled={this.props.location.pathname === '/'} onClick={this.onBrandClick}><i className="far fa-clock"/></button>
+          <div className={styles.currentDate}>
+            <p>{moment().format('D. MMM Y')}</p>
+            <p>{this.state.currentTime}</p>
+          </div>
         </div>
         <div className={styles.actionButtons}>
           <div className={styles.actionButton} onClick={this.minimizeApp}><i className="fas fa-window-minimize"></i>

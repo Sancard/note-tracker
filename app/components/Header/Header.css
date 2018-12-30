@@ -5,6 +5,24 @@
   -webkit-user-select: none;
   -webkit-app-region: drag;
 }
+.mainButton {
+  display: flex;
+  align-items: center;
+}
+.mainButton button {
+  -webkit-app-region: no-drag;
+  font-size: 30px;
+  margin-left: 10px;
+  box-shadow: 10px 0 54px -14px rgba(0, 0, 0, 0.75);
+  color: white;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+.mainButton button:disabled, .mainButton button[disabled] {
+  cursor: default;
+}
 .header p {
   padding: 10px;
   font-size: 20px;
