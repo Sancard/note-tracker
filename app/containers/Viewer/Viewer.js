@@ -6,6 +6,7 @@ import * as styles from './Viewer.css';
 import routes from '../../constants/routes';
 import TaskTable from '../../components/TaskTable/TaskTable';
 import { appUpdateProjectUuid } from '../../store/actions';
+import CreatorsModals from '../../components/CreatorsModals/CreatorsModals';
 
 type Props = {
   tasks: {
@@ -30,15 +31,29 @@ class Viewer extends Component<Props> {
     listStyle: true,
     isProjects: true,
     data: null,
-    projectUuid: null
+    modalIsOpen: false
   };
 
 
   componentWillMount() {
-    if (this.props.appState.projectUuid) {
-      this.setState({ isProjects: false, data: this.setData(this.props.appState.projectUuid), projectUuid: this.props.appState.projectUuid });
+    this.handleNewProps(this.props);
+  }
+
+  componentWillReceiveProps(props) {
+    this.handleNewProps(props);
+  }
+
+
+  handleNewProps(props) {
+    if (props.appState.projectUuid) {
+      this.setState({
+        isProjects: false,
+        data: props.tasks.tasks.filter((el) => {
+          return el.projectUuid === props.appState.projectUuid;
+        }),
+      });
     } else {
-      this.setState({ data: this.props.projects.projects });
+      this.setState({ data: props.projects.projects });
     }
   }
 
@@ -49,7 +64,7 @@ class Viewer extends Component<Props> {
 
       const data = this.setData(key);
 
-      this.setState({ isProjects: false, data, projectUuid: key });
+      this.setState({ isProjects: false, data });
     } else {
       this.props.history.push(routes.TASK + '?uuid=' + key);
     }
@@ -69,13 +84,10 @@ class Viewer extends Component<Props> {
     });
   };
 
-  onCreateNew = () => {
-    if (!this.state.isProjects) {
-      this.props.history.push(routes.TASK_CREATOR + '?projectUuid=' + this.state.projectUuid);
-    } else {
-      this.props.history.push(routes.PROJECT_CREATOR);
-    }
+  onModalTrigger = (state) => {
+    this.setState({ modalIsOpen: state });
   };
+
 
   onBack = () => {
     this.props.updateProjectUuid(null);
@@ -113,11 +125,13 @@ class Viewer extends Component<Props> {
               className="fas fa-long-arrow-alt-left"/></button> : null}
           </div>
           <div className={styles.buttons}>
-            <button type="button" onClick={this.onCreateNew}><i className="fas fa-plus"/></button>
+            <button type="button" onClick={() => this.onModalTrigger(true)}><i className="fas fa-plus"/></button>
             <button type="button" onClick={this.toggleStyle}><i className={listStyleToggleButtonClass}/></button>
           </div>
         </div>
         {displayTasks}
+        <CreatorsModals isProject={this.state.isProjects} modalTrigger={this.onModalTrigger}
+                        modalIsOpen={this.state.modalIsOpen}/>
       </React.Fragment>
     );
   }

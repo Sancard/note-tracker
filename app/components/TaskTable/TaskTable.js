@@ -54,10 +54,10 @@ const MyComponent = (props: Props) => {
           </tr>}
           </thead>
           <tbody>
-          {tasks.length > 0 ? tasks.reverse() :
-            <p className={styles.emptyTasks}>No tasks found. Hurry up and create some!</p>}
+          {tasks.length > 0 ? tasks.reverse() : null}
           </tbody>
         </table>
+        {tasks.length < 1 ? <p className={styles.emptyTasks}>No tasks found. Hurry up and create some!</p> : null}
       </div>
     </div>
   );

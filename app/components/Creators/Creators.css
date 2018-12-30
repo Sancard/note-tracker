@@ -1,6 +1,23 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+.header button {
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 25px;
+  color: white;
+}
+.header button:hover {
+  cursor: pointer;
+  color: #4ecca3;
+}
 .form {
   width: 60%;
-  margin: 6% auto;
+  margin: 20px auto;
+  padding-bottom: 50px;
 }
 .form h2 {
   color: white;

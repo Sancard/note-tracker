@@ -47,6 +47,7 @@
     "promise/no-native": "off",
     "prefer-template": "off",
     "one-var": "off",
+    "react/jsx-boolean-value": "off",
     "react/no-unused-prop-types": "off",
     "react/destructuring-assignment": "off",
     "react/no-array-index-key": "off",
