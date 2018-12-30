@@ -8,7 +8,11 @@ import NoteButton from '../../components/NoteButton/NoteButton';
 
 type Props = {
   history: {
-    push: () => void
+    push: () => void,
+    goBack: () => void,
+  },
+  location: {
+    search: string
   },
   newTask: () => void
 };
@@ -18,6 +22,7 @@ class TaskCreator extends Component<Props> {
 
   state = {
     uuid: guidGenerator(),
+    projectUuid: null,
     name: '',
     estimatedHours: null,
     description: '',
@@ -26,6 +31,18 @@ class TaskCreator extends Component<Props> {
     valid: false,
     notes: ''
   };
+
+
+  componentWillMount() {
+    const params = new URLSearchParams(this.props.location.search);
+    const projectUuid = params.get('projectUuid');
+    if (projectUuid) {
+      this.setState({ projectUuid });
+    } else {
+      this.props.history.goBack();
+    }
+  }
+
 
   onCreateTask = () => {
     if(!this.state.valid) {
@@ -57,6 +74,7 @@ class TaskCreator extends Component<Props> {
     return (
       <form className={[styles.form, 'container'].join(' ')}>
         <h2>Create a task</h2>
+        <button type="button" onClick={() => this.props.history.goBack()}>back</button>
         <div>
           <input type="text"
                  name="name"

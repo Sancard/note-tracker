@@ -45,6 +45,9 @@
     "promise/always-return": "error",
     "promise/catch-or-return": "error",
     "promise/no-native": "off",
+    "prefer-template": "off",
+    "one-var": "off",
+    "react/no-unused-prop-types": "off",
     "react/destructuring-assignment": "off",
     "react/no-array-index-key": "off",
     "react/sort-comp": [

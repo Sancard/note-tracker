@@ -13,7 +13,18 @@ export const getTask = (key) => {
   return taskStore.get(key);
 };
 
+// PROJECT STORE
+export const projectStore =  new Store({
+  name: 'projects'
+});
 
+export const saveProject = (key, json) => {
+  projectStore.set(key, json);
+};
+
+export const getProject = (key) => {
+  return projectStore.get(key);
+};
 
 // CONVERT JSON VALUES TO ITERABLE ARRAY
 export const convertValues = (json) => {

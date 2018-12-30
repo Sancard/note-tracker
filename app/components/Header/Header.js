@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import moment from "moment";
+import moment from 'moment';
 import electron from 'electron';
 import styles from './Header.css';
-import NoteButton from '../NoteButton/NoteButton';
+import * as routes from '../../constants/routes';
 
 type Props = {
   history: {
@@ -16,25 +16,37 @@ type Props = {
 };
 
 class Header extends React.Component<Props> {
+  _isMounted = false;
 
   state = {
     currentTime: moment().format('H:mm:ss')
   };
 
+  timeInterval = null;
 
   componentDidMount() {
-    setInterval(() =>{
-      this.setState({currentTime: moment().format('H:mm:ss')});
-    }, 1000);
+    this._isMounted = true;
+    if (this._isMounted) {
+      this.timeInterval = setInterval(() => {
+        this.setState({ currentTime: moment().format('H:mm:ss') });
+      }, 1000);
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+    clearInterval(this.timeInterval);
   }
 
 
   onCreateNewTask = () => {
-    this.props.history.push('/taskcreator');
+    this.props.history.push(routes.TASK_CREATOR);
   };
 
   onBrandClick = () => {
-    this.props.history.push('/');
+    if(this.props.location.pathname !== '/') {
+      this.props.history.push('/');
+    }
   };
 
 
@@ -47,18 +59,17 @@ class Header extends React.Component<Props> {
   };
 
   maximizeApp = () => {
-    electron.remote.getCurrentWindow().isMaximized() ? electron.remote.getCurrentWindow().unmaximize() :
+    if (electron.remote.getCurrentWindow().isMaximized()) {
+      electron.remote.getCurrentWindow().unmaximize();
+    } else {
       electron.remote.getCurrentWindow().maximize();
+    }
   };
 
 
   render() {
     return (
       <div className={styles.header}>
-        <div>
-          <NoteButton padding="20px 73px" onClick={this.props.location.pathname !== '/' ? this.onBrandClick : null}>Note
-            Tracker</NoteButton>
-        </div>
         <div className={styles.currentDate}>
           <p>{moment().format('D. MMM Y')}</p>
           <p>{this.state.currentTime}</p>

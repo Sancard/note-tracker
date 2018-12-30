@@ -29,7 +29,8 @@ class Task extends Component<Props> {
     currentSeconds: 0,
     task: {
       notes: '',
-      loggedTime: []
+      loggedTime: [],
+      projectUuid: ''
     }
   };
 
@@ -129,6 +130,10 @@ class Task extends Component<Props> {
     });
   };
 
+  onBack = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     let loggedTime = null;
     if (Object.entries(this.state.task.loggedTime).length > 0) {
@@ -154,6 +159,10 @@ class Task extends Component<Props> {
     return (
       <div className={styles.task}>
         <div className={styles.sideBar}>
+          <div className={styles.actionBar}>
+            <button type="button" onClick={this.onBack}><i
+              className="fas fa-long-arrow-alt-left"></i></button>
+          </div>
           <Timer getTime={this.loggedTimeHandler} initialTime={this.state.currentSeconds}/>
           <div className={styles.loggedDays}>
             {loggedTime}

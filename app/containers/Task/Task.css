@@ -67,3 +67,21 @@
 .loggedDays > p:first-of-type {
   display: none;
 }
+.actionBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+}
+
+.actionBar button {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 20px;
+  padding: 0 20px;
+  cursor: pointer;
+  outline: none;
+}
+.actionBar button:hover {
+  color: #46567f;
+}

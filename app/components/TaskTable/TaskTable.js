@@ -3,21 +3,37 @@ import * as styles from './TaskTable.css';
 import { sumLoggedTime } from '../../utils/utilities';
 
 type Props = {
-  tasks: Array<{
+  data: Array<{
     name: string,
-    estimatedHours: number
+    estimatedHours: number,
+    uuid: string
   }>,
+  isProjects: boolean,
   click: () => void
 };
 
+const taskTemplate = (el) => (
+  <React.Fragment>
+    <td>{el.name}</td>
+    <td>{el.estimatedHours} hours</td>
+    <td>{sumLoggedTime(el.loggedTime)}</td>
+    <td className={styles.descOverflow}>{el.description}</td>
+  </React.Fragment>
+);
+
+const projectTemplate = (el) => (
+  <React.Fragment>
+    <td>{el.name}</td>
+    <td>{el.tag}</td>
+  </React.Fragment>
+);
+
+
 const MyComponent = (props: Props) => {
-  const tasks = props.tasks.map((el, index) => {
+  const tasks = props.data.map((el, index) => {
     return (
       <tr key={index} onClick={() => props.click(el.uuid)}>
-        <td>{el.name}</td>
-        <td>{el.estimatedHours} hours</td>
-        <td>{sumLoggedTime(el.loggedTime)}</td>
-        <td className={styles.descOverflow}>{el.description}</td>
+        {props.isProjects ? projectTemplate(el) : taskTemplate(el)}
       </tr>
     );
   });
@@ -27,15 +43,19 @@ const MyComponent = (props: Props) => {
       <div className={styles.list}>
         <table className="table">
           <thead>
-            <tr>
-              <td>Task name</td>
-              <td>Estimated hours</td>
-              <td>Logged time</td>
-              <td>Description</td>
-            </tr>
+          {props.isProjects ? <tr>
+            <td>Project name</td>
+            <td>Tag</td>
+          </tr> : <tr>
+            <td>Task name</td>
+            <td>Estimated hours</td>
+            <td>Logged time</td>
+            <td>Description</td>
+          </tr>}
           </thead>
           <tbody>
-            {tasks.length > 0 ? tasks.reverse() : <p className={styles.emptyTasks}>No tasks found. Hurry up and create some!</p>}
+          {tasks.length > 0 ? tasks.reverse() :
+            <p className={styles.emptyTasks}>No tasks found. Hurry up and create some!</p>}
           </tbody>
         </table>
       </div>

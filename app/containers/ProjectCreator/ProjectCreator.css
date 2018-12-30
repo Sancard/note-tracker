@@ -1,0 +1,24 @@
+.form {
+  width: 60%;
+  margin: 6% auto;
+}
+.form h2 {
+  color: white;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  background-color: #46567f;
+  border: none;
+  border-radius: 2px;
+  color: white;
+  margin: 10px 0;
+  font-family: inherit;
+}
+.form input::placeholder,
+.form textarea::placeholder {
+  color: #ccc;
+}
