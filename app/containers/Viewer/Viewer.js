@@ -8,6 +8,7 @@ import TaskTable from '../../components/TaskTable/TaskTable';
 import { appUpdateProjectUuid, projectDeleteProject } from '../../store/actions';
 import CreatorsModals from '../CreatorsModals/CreatorsModals';
 import DialogModal from '../../components/DialogModal/DialogModal';
+import { sumAllTasksTime } from '../../utils/utilities';
 
 type Props = {
   tasks: {
@@ -56,7 +57,14 @@ class Viewer extends Component<Props> {
         })
       });
     } else {
-      this.setState({ data: props.projects.projects });
+      this.setState({
+        data: props.projects.projects.map((el) => {
+          return {
+            ...el,
+            sumTasksTime: sumAllTasksTime(el.uuid, props.tasks.tasks)
+          }
+        })
+      });
     }
   }
 

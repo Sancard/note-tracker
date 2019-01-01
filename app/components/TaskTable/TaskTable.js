@@ -25,6 +25,7 @@ const projectTemplate = (el) => (
   <React.Fragment>
     <td>{el.name}</td>
     <td>{el.tag}</td>
+    <td>{el.sumTasksTime}</td>
   </React.Fragment>
 );
 
@@ -46,6 +47,7 @@ const MyComponent = (props: Props) => {
           {props.isProjects ? <tr>
             <td>Project name</td>
             <td>Tag</td>
+            <td>Time spent</td>
           </tr> : <tr>
             <td>Task name</td>
             <td>Estimated hours</td>
