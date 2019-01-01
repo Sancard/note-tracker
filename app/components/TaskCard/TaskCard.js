@@ -16,7 +16,7 @@ type Props = {
 const taskTemplate = (props: Props) => (
   <React.Fragment>
     <h3>{props.name}</h3>
-    <span className={styles.sectionTitle}>Logged:</span>
+    <span className={styles.sectionTitle}>Time spent:</span>
     <p>{sumLoggedTime(props.loggedTime)}</p>
     <span className={styles.sectionTitle}>Estimated:</span>
     <p>{props.estimatedHours} hours</p>

@@ -49,7 +49,7 @@ const MyComponent = (props: Props) => {
           </tr> : <tr>
             <td>Task name</td>
             <td>Estimated hours</td>
-            <td>Logged time</td>
+            <td>Time spent</td>
             <td>Description</td>
           </tr>}
           </thead>

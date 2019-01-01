@@ -6,7 +6,7 @@ import * as styles from './Viewer.css';
 import routes from '../../constants/routes';
 import TaskTable from '../../components/TaskTable/TaskTable';
 import { appUpdateProjectUuid } from '../../store/actions';
-import CreatorsModals from '../../components/CreatorsModals/CreatorsModals';
+import CreatorsModals from '../CreatorsModals/CreatorsModals';
 
 type Props = {
   tasks: {

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { guidGenerator } from '../../utils/utilities';
-import { ProjectCreator, TaskCreator } from '../Creators/Creators';
+import { ProjectCreator, TaskCreator } from '../../components/Creators/Creators';
 import * as styles from './CreatorsModals.css';
-import { projectNewProject, taskNewTask } from '../../store/actions';
+import { projectNewProject, taskNewTask } from '../../store/actions/index';
 
 type Props = {
   modalIsOpen: boolean,
