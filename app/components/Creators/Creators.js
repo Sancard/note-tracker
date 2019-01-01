@@ -36,6 +36,7 @@ export const TaskCreator = (props: taskProps) => {
         <div>
           <input type="number"
                  name="estimatedHours"
+                 min="1"
                  onChange={props.handleInputChange}
                  placeholder="Enter estimated hours"/>
         </div>
