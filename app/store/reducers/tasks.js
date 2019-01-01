@@ -1,5 +1,5 @@
-import { TASK_NEW_TASK, TASK_UPDATE_TASK } from '../actions/actionTypes';
-import { saveTask, taskStore, convertValues } from '../../utils/storage';
+import { TASK_DELETE_TASK, TASK_NEW_TASK, TASK_UPDATE_TASK } from '../actions/actionTypes';
+import { saveTask, taskStore, convertValues, deleteTask } from '../../utils/storage';
 
 const initialState = {
   tasks: taskStore.store ? convertValues(taskStore.store) : []
@@ -26,6 +26,11 @@ const reducer = (state = initialState, action) => {
           return taskSnap;
         })
       };
+    }
+    case TASK_DELETE_TASK: {
+      deleteTask(action.task.uuid);
+      const tasks = state.tasks.filter((el) => el.uuid !== action.task.uuid);
+      return {...state, tasks}
     }
     default: {
       return state;

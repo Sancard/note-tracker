@@ -5,8 +5,9 @@ import TaskCard from '../../components/TaskCard/TaskCard';
 import * as styles from './Viewer.css';
 import routes from '../../constants/routes';
 import TaskTable from '../../components/TaskTable/TaskTable';
-import { appUpdateProjectUuid } from '../../store/actions';
+import { appUpdateProjectUuid, projectDeleteProject } from '../../store/actions';
 import CreatorsModals from '../CreatorsModals/CreatorsModals';
+import DialogModal from '../../components/DialogModal/DialogModal';
 
 type Props = {
   tasks: {
@@ -21,7 +22,8 @@ type Props = {
   appState: {
     projectUuid: string
   },
-  updateProjectUuid: () => void
+  updateProjectUuid: () => void,
+  deleteProject: () => void
 };
 
 class Viewer extends Component<Props> {
@@ -31,7 +33,8 @@ class Viewer extends Component<Props> {
     listStyle: true,
     isProjects: true,
     data: null,
-    modalIsOpen: false
+    modalIsOpen: false,
+    dialogOpen: false
   };
 
 
@@ -50,7 +53,7 @@ class Viewer extends Component<Props> {
         isProjects: false,
         data: props.tasks.tasks.filter((el) => {
           return el.projectUuid === props.appState.projectUuid;
-        }),
+        })
       });
     } else {
       this.setState({ data: props.projects.projects });
@@ -88,10 +91,20 @@ class Viewer extends Component<Props> {
     this.setState({ modalIsOpen: state });
   };
 
+  onDialogTrigger = (state) => {
+    this.setState({ dialogOpen: state });
+  };
+
 
   onBack = () => {
     this.props.updateProjectUuid(null);
-    this.setState({ isProjects: true, data: this.props.projects.projects });
+    this.setState({ isProjects: true, data: this.props.projects.projects, dialogOpen: false, modalIsOpen: false });
+  };
+
+  onDeleteProject = () => {
+    this.props.deleteProject({ uuid: this.props.appState.projectUuid });
+    this.onDialogTrigger(false);
+    this.onBack();
   };
 
   render() {
@@ -127,11 +140,17 @@ class Viewer extends Component<Props> {
           <div className={styles.buttons}>
             <button type="button" onClick={() => this.onModalTrigger(true)}><i className="fas fa-plus"/></button>
             <button type="button" onClick={this.toggleStyle}><i className={listStyleToggleButtonClass}/></button>
+            {!this.state.isProjects ?
+              <button type="button" onClick={() => this.onDialogTrigger(true)}><i className="fas fa-trash-alt"/>
+              </button>
+              : null}
           </div>
         </div>
         {displayTasks}
         <CreatorsModals isProject={this.state.isProjects} modalTrigger={this.onModalTrigger}
                         modalIsOpen={this.state.modalIsOpen}/>
+        <DialogModal modalIsOpen={this.state.dialogOpen} modalTrigger={this.onDialogTrigger}
+                     onConfirm={this.onDeleteProject} onDecline={() => this.onDialogTrigger(false)}/>
       </React.Fragment>
     );
   }
@@ -147,7 +166,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateProjectUuid: (projectUuid) => dispatch(appUpdateProjectUuid(projectUuid))
+    updateProjectUuid: (projectUuid) => dispatch(appUpdateProjectUuid(projectUuid)),
+    deleteProject: (project) => dispatch(projectDeleteProject(project))
   };
 };
 

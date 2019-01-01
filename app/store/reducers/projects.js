@@ -1,5 +1,5 @@
-import { PROJECT_NEW_PROJECT } from '../actions/actionTypes';
-import { saveProject, projectStore, convertValues } from '../../utils/storage';
+import { PROJECT_DELETE_PROJECT, PROJECT_NEW_PROJECT } from '../actions/actionTypes';
+import { saveProject, projectStore, convertValues, deleteProject } from '../../utils/storage';
 
 const initialState = {
   projects: projectStore.store ? convertValues(projectStore.store) : []
@@ -10,6 +10,11 @@ const reducer = (state = initialState, action) => {
     case PROJECT_NEW_PROJECT: {
       const projects = state.projects.concat(action.project);
       saveProject(action.project.uuid, action.project);
+      return { ...state, projects };
+    }
+    case PROJECT_DELETE_PROJECT: {
+      const projects = state.projects.filter((el) => el.uuid !== action.project.uuid);
+      deleteProject(action.project.uuid);
       return { ...state, projects };
     }
     default: {

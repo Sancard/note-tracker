@@ -30,7 +30,7 @@ const projectTemplate = (el) => (
 
 
 const MyComponent = (props: Props) => {
-  const tasks = props.data.map((el, index) => {
+  const data = props.data.map((el, index) => {
     return (
       <tr key={index} onClick={() => props.click(el.uuid)}>
         {props.isProjects ? projectTemplate(el) : taskTemplate(el)}
@@ -54,10 +54,12 @@ const MyComponent = (props: Props) => {
           </tr>}
           </thead>
           <tbody>
-          {tasks.length > 0 ? tasks.reverse() : null}
+          {data.length > 0 ? data.reverse() : null}
           </tbody>
         </table>
-        {tasks.length < 1 ? <p className={styles.emptyTasks}>No tasks found. Hurry up and create some!</p> : null}
+        {data.length < 1 ?
+          <p className={styles.emptyTasks}>No {props.isProjects ? 'projects' : 'tasks'} found. Hurry up and create
+            some!</p> : null}
       </div>
     </div>
   );

@@ -107,7 +107,7 @@ class CreatorsModals extends Component<Props> {
     return (
       <Modal
         isOpen={this.state.modalIsOpen}
-        contentLabel="Example Modal"
+        contentLabel="Creator Modal"
         onRequestClose={() => this.props.modalTrigger(false)}
         className={styles.modal}
         overlayClassName={styles.backdrop}

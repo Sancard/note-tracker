@@ -6,9 +6,10 @@ import sanitizeHtml from 'sanitize-html';
 import moment from 'moment';
 import { getTask } from '../../utils/storage';
 import Timer from '../../components/Timer/Timer';
-import { updateTask } from '../../store/actions';
+import { deleteTask, updateTask } from '../../store/actions';
 import * as styles from './Task.css';
 import { sumLoggedTime } from '../../utils/utilities';
+import DialogModal from '../../components/DialogModal/DialogModal';
 
 type Props = {
   location: {
@@ -18,13 +19,15 @@ type Props = {
     goBack: () => void,
     push: () => void
   },
-  updateTask: () => void
+  updateTask: () => void,
+  deleteTask: () => void
 };
 
 class Task extends Component<Props> {
   props: Props;
 
   state = {
+    dialogOpen: false,
     currentDate: moment().format('D-M-Y'),
     currentSeconds: 0,
     task: {
@@ -95,19 +98,19 @@ class Task extends Component<Props> {
     if (e.key === 'Tab') {
       e.preventDefault();
       // TODO: Implementing tab later
-      /*this.setState((prevState) => {
+      /* this.setState((prevState) => {
         return {
           task: { ...prevState.task, notes: `${prevState.task.notes}    ` }
         };
       });
       setTimeout(() => {
         this.setCursorAtEnd();
-      });*/
+      }); */
     }
   };
 
 
-  /*setCursorAtEnd = (el = this.editorRef.current) => {
+  /* setCursorAtEnd = (el = this.editorRef.current) => {
     const range = document.createRange();
     const sel = window.getSelection();
     range.selectNodeContents(el);
@@ -115,7 +118,7 @@ class Task extends Component<Props> {
     sel.removeAllRanges();
     sel.addRange(range);
     el.focus();
-  };*/
+  }; */
 
   loggedTimeHandler = (seconds) => {
     this.setState((prevState) => {
@@ -131,7 +134,16 @@ class Task extends Component<Props> {
   };
 
   onBack = () => {
-    this.props.history.goBack();
+    this.props.history.push('/');
+  };
+
+  onDeleteTask = () => {
+      this.props.deleteTask(this.state.task);
+      this.props.history.push('/');
+  };
+
+  onDialogTrigger = (state) => {
+    this.setState({ dialogOpen: state });
   };
 
   render() {
@@ -161,7 +173,8 @@ class Task extends Component<Props> {
         <div className={styles.sideBar}>
           <div className={styles.actionBar}>
             <button type="button" onClick={this.onBack}><i
-              className="fas fa-long-arrow-alt-left"></i></button>
+              className="fas fa-long-arrow-alt-left"/></button>
+            <button type="button" onClick={() => this.onDialogTrigger(true)}><i className="fas fa-trash-alt" /></button>
           </div>
           <Timer getTime={this.loggedTimeHandler} initialTime={this.state.currentSeconds}/>
           <div className={styles.loggedDays}>
@@ -188,6 +201,8 @@ class Task extends Component<Props> {
             onBlur={this.sanitize}
           />
         </div>
+        <DialogModal modalIsOpen={this.state.dialogOpen} modalTrigger={this.onDialogTrigger}
+                     onConfirm={this.onDeleteTask} onDecline={() => this.onDialogTrigger(false)}/>
       </div>
     );
   }
@@ -195,7 +210,8 @@ class Task extends Component<Props> {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateTask: (task) => dispatch(updateTask(task))
+    updateTask: (task) => dispatch(updateTask(task)),
+    deleteTask: (task) => dispatch(deleteTask(task))
   };
 };
 
