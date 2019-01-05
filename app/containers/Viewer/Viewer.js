@@ -33,6 +33,7 @@ class Viewer extends Component<Props> {
   state = {
     listStyle: true,
     isProjects: true,
+    dataBackup: null,
     data: null,
     modalIsOpen: false,
     dialogOpen: false
@@ -50,21 +51,22 @@ class Viewer extends Component<Props> {
 
   handleNewProps(props) {
     if (props.appState.projectUuid) {
+      const data = props.tasks.tasks.filter((el) => {
+        return el.projectUuid === props.appState.projectUuid;
+      });
       this.setState({
         isProjects: false,
-        data: props.tasks.tasks.filter((el) => {
-          return el.projectUuid === props.appState.projectUuid;
-        })
+        data,
+        dataBackup: data
       });
     } else {
-      this.setState({
-        data: props.projects.projects.map((el) => {
-          return {
-            ...el,
-            sumTasksTime: sumAllTasksTime(el.uuid, props.tasks.tasks)
-          }
-        })
+      const data = props.projects.projects.map((el) => {
+        return {
+          ...el,
+          sumTasksTime: sumAllTasksTime(el.uuid, props.tasks.tasks)
+        };
       });
+      this.setState({ data, dataBackup: data });
     }
   }
 
@@ -85,6 +87,24 @@ class Viewer extends Component<Props> {
     return this.props.tasks.tasks.filter((el) => {
       return el.projectUuid === key;
     });
+  };
+
+  filterData = (event) => {
+    const { value } = event.target;
+    if (value.trim()) {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          data: prevState.dataBackup.filter((el) => {
+            return el.name.toLowerCase().match(value);
+          })
+        };
+      });
+    } else {
+      this.setState(prevState => {
+        return { ...prevState, data: prevState.dataBackup };
+      });
+    }
   };
 
   toggleStyle = () => {
@@ -144,6 +164,9 @@ class Viewer extends Component<Props> {
           <div className={styles.buttons}>
             {!this.state.isProjects ? <button type="button" onClick={this.onBack}><i
               className="fas fa-long-arrow-alt-left"/></button> : null}
+          </div>
+          <div className={styles.search}>
+            <input type="text" placeholder="Search..." onChange={this.filterData}/>
           </div>
           <div className={styles.buttons}>
             <button type="button" onClick={() => this.onModalTrigger(true)}><i className="fas fa-plus"/></button>

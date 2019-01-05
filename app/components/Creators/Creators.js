@@ -43,7 +43,7 @@ export const TaskCreator = (props: taskProps) => {
         <div>
           <textarea placeholder="Task description" name="description" onChange={props.handleInputChange}/>
         </div>
-        <NoteButton disabled={!props.valid} type="button" onClick={props.onCreateTask}>Create new task</NoteButton>
+        <NoteButton padding="10px 20px" disabled={!props.valid} type="button" onClick={props.onCreateTask}>Create new task</NoteButton>
       </form>
     </React.Fragment>
   );
@@ -68,7 +68,7 @@ export const ProjectCreator = (props: projectProps) => {
         <div>
           <input placeholder="Tag (e.g. company name)" name="tag" onChange={props.handleInputChange}/>
         </div>
-        <NoteButton disabled={!props.valid} type="button" onClick={props.onCreateProject}>Create new project</NoteButton>
+        <NoteButton padding="10px 20px" disabled={!props.valid} type="button" onClick={props.onCreateProject}>Create new project</NoteButton>
       </form>
     </React.Fragment>
   );

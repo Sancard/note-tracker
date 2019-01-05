@@ -34,3 +34,19 @@
 .buttons button:hover {
   color: #46567f;
 }
+.search {
+  margin-left: 40px;
+}
+.search input {
+  background-color: #46567f;
+  border: none;
+  outline: none;
+  width: 250px;
+  height: 30px;
+  padding: 3px 8px;
+  color: white;
+  border-radius: 5px;
+}
+.search input::placeholder {
+  color: #ddd;
+}
