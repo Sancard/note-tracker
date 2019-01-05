@@ -83,6 +83,12 @@ class Viewer extends Component<Props> {
     }
   };
 
+  getProjectData = () => {
+    return this.props.projects.projects.filter((el) => {
+      return el.uuid === this.props.appState.projectUuid
+    });
+  };
+
   setData = (key) => {
     return this.props.tasks.tasks.filter((el) => {
       return el.projectUuid === key;
@@ -136,7 +142,7 @@ class Viewer extends Component<Props> {
   };
 
   render() {
-    let tasksCard, taskGrid, taskTable;
+    let tasksCard, taskGrid, taskTable, projectInfo;
 
     // create view based on state
     if (this.state.listStyle) {
@@ -144,9 +150,9 @@ class Viewer extends Component<Props> {
         <TaskTable isProjects={this.state.isProjects} data={this.state.data} click={this.onSelectedRow}/>
       </div>;
     } else { // grid style
-      tasksCard = this.state.data.map((el, index) =>
+      tasksCard = this.state.data.map((el) =>
         (
-          <TaskCard {...el} isProjects={this.state.isProjects} key={index} click={() => this.onSelectedRow(el.uuid)}/>
+          <TaskCard {...el} isProjects={this.state.isProjects} key={el.uuid} click={() => this.onSelectedRow(el.uuid)}/>
         )
       );
       taskGrid = <div className={styles.tasksGrid}>{tasksCard.length > 0 ? tasksCard.reverse() : <p
@@ -157,6 +163,16 @@ class Viewer extends Component<Props> {
     const displayTasks = this.state.listStyle ? taskTable : taskGrid;
 
     const listStyleToggleButtonClass = this.state.listStyle ? 'fas fa-th-large' : 'fas fa-list-ul';
+
+    if(!this.state.isProjects) {
+      const data = this.getProjectData()[0];
+      projectInfo = (
+        <div className={styles.projectInfo}>
+          <p><b>Project name:</b> {data.name}</p>
+          <p><b>Tag:</b> {data.tag}</p>
+        </div>
+      );
+    }
 
     return (
       <React.Fragment>
@@ -177,6 +193,7 @@ class Viewer extends Component<Props> {
               : null}
           </div>
         </div>
+        {projectInfo}
         {displayTasks}
         <CreatorsModals isProject={this.state.isProjects} modalTrigger={this.onModalTrigger}
                         modalIsOpen={this.state.modalIsOpen}/>

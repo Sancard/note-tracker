@@ -50,7 +50,6 @@
     "react/jsx-boolean-value": "off",
     "react/no-unused-prop-types": "off",
     "react/destructuring-assignment": "off",
-    "react/no-array-index-key": "off",
     "react/sort-comp": [
       "error",
       {

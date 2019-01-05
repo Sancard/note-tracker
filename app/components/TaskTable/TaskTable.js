@@ -31,9 +31,9 @@ const projectTemplate = (el) => (
 
 
 const MyComponent = (props: Props) => {
-  const data = props.data.map((el, index) => {
+  const data = props.data.map((el) => {
     return (
-      <tr key={index} onClick={() => props.click(el.uuid)}>
+      <tr key={el.uuid} onClick={() => props.click(el.uuid)}>
         {props.isProjects ? projectTemplate(el) : taskTemplate(el)}
       </tr>
     );

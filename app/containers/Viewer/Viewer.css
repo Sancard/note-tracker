@@ -50,3 +50,15 @@
 .search input::placeholder {
   color: #ddd;
 }
+.projectInfo {
+  display: flex;
+  margin: 10px 0;
+}
+.projectInfo p {
+  margin: 0 10px;
+}
+.projectInfo p b {
+  color: #ddd;
+  font-weight: 500;
+  font-size: 10px;
+}
