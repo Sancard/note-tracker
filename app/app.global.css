@@ -4,6 +4,8 @@
  */
 
 @import '~@fortawesome/fontawesome-free/css/all.css';
+@import "~react-times/css/material/default.css";
+@import '~react-day-picker/lib/style.css';
 
 @font-face {
   font-family: "Open Sans";
@@ -42,4 +44,17 @@ html {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: #E5E5E5;
+}
+
+/* REACT TIME PICKER STYLES */
+.DayPicker-wrapper, .DayPicker-Day {
+  outline: none
+}
+.DayPicker:not(.DayPicker--interactionDisabled)
+.DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+  background-color: rgb(46, 56, 84);
+}
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside),
+.DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside):hover {
+  background-color: rgb(46, 56, 84);
 }

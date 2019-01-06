@@ -10,6 +10,7 @@ import { deleteTask, updateTask } from '../../store/actions';
 import * as styles from './Task.css';
 import { sumLoggedTime } from '../../utils/utilities';
 import DialogModal from '../../components/DialogModal/DialogModal';
+import LogPicker from '../../components/LogPicker/LogPicker';
 
 type Props = {
   location: {
@@ -20,13 +21,15 @@ type Props = {
     push: () => void
   },
   updateTask: () => void,
-  deleteTask: () => void
+  deleteTask: () => void,
+  onClick: () => void,
 };
 
 class Task extends Component<Props> {
   props: Props;
 
   state = {
+    showLogPicker: false,
     dialogOpen: false,
     currentDate: moment().format('D-M-Y'),
     currentSeconds: 0,
@@ -133,50 +136,79 @@ class Task extends Component<Props> {
     });
   };
 
+
+  addTimeHandler = (date, time) => {
+    this.setState((prevState) => {
+      const timeToUpdate = { ...prevState.task.loggedTime };
+      timeToUpdate[date] = time;
+      return {
+        showLogPicker: false,
+        currentSeconds: date === prevState.currentDate ? time : prevState.currentSeconds,
+        task: {
+          ...prevState.task,
+          loggedTime: timeToUpdate,
+        }
+      };
+    });
+  };
+
   onBack = () => {
     this.props.history.push('/');
   };
 
   onDeleteTask = () => {
-      this.props.deleteTask(this.state.task);
-      this.props.history.push('/');
+    this.props.deleteTask(this.state.task);
+    this.props.history.push('/');
   };
 
   onDialogTrigger = (state) => {
     this.setState({ dialogOpen: state });
   };
 
+  toggleLogPicker = (state) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        showLogPicker: !state ? state : !prevState.showLogPicker
+      };
+    });
+  };
+
   render() {
     let loggedTime = null;
     if (Object.entries(this.state.task.loggedTime).length > 0) {
       // sort dates properly
-      loggedTime = Object.entries(this.state.task.loggedTime).sort((a,b) => {
+      loggedTime = Object.entries(this.state.task.loggedTime).sort((a, b) => {
         const _a = moment((a[0]), 'D-M-Y').toDate();
         const _b = moment(b[0], 'D-M-Y').toDate();
 
-        if(_a < _b) {
+        if (_a < _b) {
           return 1;
         } else if (_a > _b) {
           return -1;
         }
-        return 0
+        return 0;
       });
       // create elements
-      loggedTime = loggedTime.map((el, index) => {
+      loggedTime = loggedTime.map((el) => {
         return (
-          <p key={index}>{el[0].replace(/-/g, '.')} • {moment.utc(el[1] * 1000).format('HH:mm:ss')}</p>
+          <p key={el[0]}>{el[0].replace(/-/g, '.')} • {moment.utc(el[1] * 1000).format('HH:mm:ss')}</p>
         );
       });
     }
+
     return (
       <div className={styles.task}>
         <div className={styles.sideBar}>
           <div className={styles.actionBar}>
             <button type="button" onClick={this.onBack}><i
               className="fas fa-long-arrow-alt-left"/></button>
-            <button type="button" onClick={() => this.onDialogTrigger(true)}><i className="fas fa-trash-alt" /></button>
+            <button type="button" onClick={this.toggleLogPicker}><i
+              className="fas fa-plus"/></button>
+            <button type="button" onClick={() => this.onDialogTrigger(true)}><i className="fas fa-trash-alt"/></button>
           </div>
           <Timer getTime={this.loggedTimeHandler} initialTime={this.state.currentSeconds}/>
+          {this.state.showLogPicker ? <LogPicker addTimeHandler={this.addTimeHandler}/> : null}
           <div className={styles.loggedDays}>
             {loggedTime}
           </div>
@@ -197,6 +229,7 @@ class Task extends Component<Props> {
             onChange={this.handleInputChange} // handle innerHTML change
             className={styles.area}
             tagName="pre"
+            onFocus={() => this.toggleLogPicker(false)}
             onKeyDown={this.handleTab}
             onBlur={this.sanitize}
           />

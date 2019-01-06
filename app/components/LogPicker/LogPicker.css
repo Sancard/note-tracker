@@ -1,0 +1,12 @@
+.picker {
+  background-color: #232931;
+  position: absolute;
+  left: 255px;
+  width: 300px;
+  top: 60px;
+}
+
+.button {
+  text-align: center;
+  padding: 10px 0;
+}

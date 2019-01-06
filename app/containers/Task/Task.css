@@ -3,6 +3,7 @@
   width: 100%;
   flex-direction: row;
 }
+
 .sideBar {
   width: 20%;
   padding: 10px;
@@ -10,23 +11,28 @@
   background-color: #232931;
   box-shadow: 4px 0 7px -3px rgba(0, 0, 0, 0.75);
 }
+
 .sideBar h3 {
   font-weight: 400;
   margin: 0;
 }
+
 .sideBar span {
   color: #ddd;
   font-size: 10px;
 }
+
 .desc {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .editor {
   width: 100%;
   max-width: 100%;
 }
+
 .editor .area {
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -44,19 +50,23 @@
   box-sizing: border-box;
   outline: none;
 }
+
 .editor .area img {
   width: 300px;
   height: auto;
 }
+
 .timer {
   font-size: 50px;
   text-align: center;
   margin: 10px 0;
 }
+
 .loggedDays {
   overflow: auto;
   max-height: 50%;
 }
+
 .loggedDays > p {
   margin: 0;
   padding: 10px 0;
@@ -64,9 +74,11 @@
   border-top: 1px solid #2e3854;
   border-bottom: 1px solid #2e3854;
 }
+
 .loggedDays > p:first-of-type {
   display: none;
 }
+
 .actionBar {
   display: flex;
   justify-content: space-between;
@@ -82,6 +94,7 @@
   cursor: pointer;
   outline: none;
 }
+
 .actionBar button:hover {
   color: #46567f;
 }

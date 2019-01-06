@@ -5,7 +5,7 @@ import * as styles from './Timer.css';
 
 type Props = {
   getTime: () => void,
-  initialTime: number
+  initialTime: number,
 };
 
 
@@ -24,9 +24,16 @@ class Timer extends Component<Props> {
     this.startCounting();
   }
 
+  componentWillReceiveProps(props) {
+    if(props.initialTime !== this.props.initialTime) {
+      this.setState({secondsElapsed: props.initialTime});
+    }
+  }
+
   componentWillUnmount() {
     this.stopCounting();
   }
+
 
   startCounting = () => {
     this.setState({play: true});
