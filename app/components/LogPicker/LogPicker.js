@@ -26,6 +26,9 @@ class LogPicker extends Component<Props> {
   };
 
   onDayClick = (day) => {
+    if(day > new Date()) {
+      return;
+    }
     this.setState({day: moment(day).format('D-M-Y'), selectedDay: day});
   };
 

@@ -1,7 +1,7 @@
 {
   "name": "note-tracker",
   "productName": "NoteTracker",
-  "version": "0.2",
+  "version": "0.2.0",
   "description": "Note Tracker is a simple task manager to track your time and thoughts.",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
