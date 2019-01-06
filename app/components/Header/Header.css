@@ -11,9 +11,9 @@
 }
 .mainButton button {
   -webkit-app-region: no-drag;
-  font-size: 30px;
+  /*font-size: 30px;*/
   margin-left: 10px;
-  box-shadow: 10px 0 54px -14px rgba(0, 0, 0, 0.75);
+  /*box-shadow: 10px 0 54px -14px rgba(0, 0, 0, 0.75);*/
   color: white;
   cursor: pointer;
   border: none;
@@ -22,6 +22,9 @@
 }
 .mainButton button:disabled, .mainButton button[disabled] {
   cursor: default;
+}
+.mainButton img {
+  width: 20px;
 }
 .header p {
   padding: 10px;

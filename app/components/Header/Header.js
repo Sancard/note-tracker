@@ -7,6 +7,7 @@ import electron from 'electron';
 import styles from './Header.css';
 import * as routes from '../../constants/routes';
 import { appUpdateProjectUuid } from '../../store/actions';
+import logo from '../../assets/images/icon.png'
 
 type Props = {
   history: {
@@ -75,7 +76,9 @@ class Header extends React.Component<Props> {
     return (
       <div className={styles.header}>
         <div className={styles.mainButton}>
-          <button type="button" disabled={this.props.location.pathname === '/'} onClick={this.onBrandClick}><i className="far fa-clock"/></button>
+          <button type="button" disabled={this.props.location.pathname === '/'} onClick={this.onBrandClick}>
+            <img src={logo} alt="NoteTracker Icon"/>
+          </button>
           <div className={styles.currentDate}>
             <p>{moment().format('D. MMM Y')}</p>
             <p>{this.state.currentTime}</p>
