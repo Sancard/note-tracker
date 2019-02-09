@@ -32,13 +32,10 @@
   outline: none;
 }
 .buttons button:hover {
-  color: #46567f;
-}
-.search {
-  margin-left: 40px;
+  color: #4ecca3;
 }
 .search input {
-  background-color: #46567f;
+  background-color: #3f5765;
   border: none;
   outline: none;
   width: 250px;
@@ -48,7 +45,7 @@
   border-radius: 5px;
 }
 .search input::placeholder {
-  color: #ddd;
+  color: #efefef;
 }
 .projectInfo {
   display: flex;
@@ -58,7 +55,7 @@
   margin: 0 10px;
 }
 .projectInfo p b {
-  color: #ddd;
+  color: #bdd4de;
   font-weight: 500;
   font-size: 10px;
 }

@@ -8,8 +8,7 @@
   width: 20%;
   padding: 10px;
   height: 100vh;
-  background-color: #232931;
-  box-shadow: 4px 0 7px -3px rgba(0, 0, 0, 0.75);
+  background-color: #2b3a42;
 }
 
 .sideBar h3 {
@@ -31,8 +30,29 @@
 .editor {
   width: 100%;
   max-width: 100%;
+  overflow-y: auto !important;
+  height: 80vh !important;
+  overflow-x: hidden !important;
+  padding: 10px;
+}
+.editorWrapper {
+  width: 100%;
+  max-width: 100%;
+  background-color: #2c2828;
+  padding: 10px;
+}
+.toolbarEditor {
+  width: 70%;
+  background: #2c2828 !important;
+  border: none !important;
+  color: black;
+}
+.toolbarEditor > div > div {
+  background-color: #fff;
+  border: none;
 }
 
+/*
 .editor .area {
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -50,6 +70,7 @@
   box-sizing: border-box;
   outline: none;
 }
+*/
 
 .editor .area img {
   width: 300px;
@@ -71,8 +92,8 @@
   margin: 0;
   padding: 10px 0;
   text-align: center;
-  border-top: 1px solid #2e3854;
-  border-bottom: 1px solid #2e3854;
+  border-top: 1px solid #3f5765;
+  border-bottom: 1px solid #3f5765;
 }
 
 .loggedDays > p:first-of-type {
@@ -96,5 +117,5 @@
 }
 
 .actionBar button:hover {
-  color: #46567f;
+  color: #4ecca3;
 }

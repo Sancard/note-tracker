@@ -1,5 +1,5 @@
 .header {
-  background-color: #283149;
+  background-color: #2b3a42;
   display: flex;
   justify-content: space-between;
   -webkit-user-select: none;
@@ -24,7 +24,7 @@
   cursor: default;
 }
 .mainButton img {
-  width: 20px;
+  width: 35px;
 }
 .header p {
   padding: 10px;
@@ -56,4 +56,13 @@
   font-size: 15px;
   margin: 0;
   padding: 0;
+}
+.appName {
+  margin: 0 15px;
+}
+.appName > span {
+  font-size: 22px;
+}
+.appName > span:nth-child(2) {
+  color: #52cc1f;
 }

@@ -9,6 +9,7 @@ import { appUpdateProjectUuid, projectDeleteProject } from '../../store/actions'
 import CreatorsModals from '../CreatorsModals/CreatorsModals';
 import DialogModal from '../../components/DialogModal/DialogModal';
 import { sumAllTasksTime } from '../../utils/utilities';
+import FAB from '../../components/FAB/FAB';
 
 type Props = {
   tasks: {
@@ -185,8 +186,7 @@ class Viewer extends Component<Props> {
             <input type="text" placeholder="Search..." onChange={this.filterData}/>
           </div>
           <div className={styles.buttons}>
-            <button type="button" onClick={() => this.onModalTrigger(true)}><i className="fas fa-plus"/></button>
-            <button type="button" onClick={this.toggleStyle}><i className={listStyleToggleButtonClass}/></button>
+            {/*<button type="button" onClick={this.toggleStyle}><i className={listStyleToggleButtonClass}/></button>*/}
             {!this.state.isProjects ?
               <button type="button" onClick={() => this.onDialogTrigger(true)}><i className="fas fa-trash-alt"/>
               </button>
@@ -199,6 +199,7 @@ class Viewer extends Component<Props> {
                         modalIsOpen={this.state.modalIsOpen}/>
         <DialogModal modalIsOpen={this.state.dialogOpen} modalTrigger={this.onDialogTrigger}
                      onConfirm={this.onDeleteProject} onDecline={() => this.onDialogTrigger(false)}/>
+        <FAB click={() => this.onModalTrigger(true)}/>
       </React.Fragment>
     );
   }

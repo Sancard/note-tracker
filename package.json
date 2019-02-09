@@ -1,7 +1,7 @@
 {
   "name": "note-tracker",
   "productName": "NoteTracker",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "description": "Note Tracker is a simple task manager to track your time and thoughts.",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -201,6 +201,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",
     "devtron": "^1.4.0",
+    "draft-js": "^0.10.5",
     "electron-debug": "^2.0.0",
     "electron-log": "^2.2.17",
     "electron-store": "^2.0.0",
@@ -209,9 +210,9 @@
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.23",
     "react": "^16.6.3",
-    "react-contenteditable": "^3.2.3",
     "react-day-picker": "^7.2.4",
     "react-dom": "^16.6.3",
+    "react-draft-wysiwyg": "^1.13.1",
     "react-hot-loader": "^4.3.12",
     "react-modal": "^3.8.1",
     "react-redux": "^5.1.1",
@@ -220,7 +221,6 @@
     "react-times": "^3.1.10",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "sanitize-html": "^1.20.0",
     "source-map-support": "^0.5.9"
   },
   "devEngines": {

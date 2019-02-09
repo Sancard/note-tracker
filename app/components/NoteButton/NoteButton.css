@@ -2,7 +2,7 @@
   outline: none;
   cursor: pointer;
   border: none;
-  background-color: rgb(46, 56, 84);
+  background-color: #3f5765;
   color: white;
   text-transform: uppercase;
   box-shadow: 10px 0 54px -14px rgba(0, 0, 0, 0.75);
@@ -15,5 +15,5 @@
 .button[disabled] {
   cursor: not-allowed;
   color: white;
-  background-color: rgb(68, 77, 102);
+  background-color: #515a65;
 }

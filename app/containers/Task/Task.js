@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ContentEditable from 'react-contenteditable';
-import sanitizeHtml from 'sanitize-html';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import moment from 'moment';
+import { Editor } from 'react-draft-wysiwyg';
 import { getTask } from '../../utils/storage';
 import Timer from '../../components/Timer/Timer';
 import { deleteTask, updateTask } from '../../store/actions';
@@ -28,11 +28,14 @@ type Props = {
 class Task extends Component<Props> {
   props: Props;
 
+
+  // INITIALIZATION OF TASK
   state = {
     showLogPicker: false,
     dialogOpen: false,
     currentDate: moment().format('D-M-Y'),
     currentSeconds: 0,
+    editorState: null,
     task: {
       notes: '',
       loggedTime: [],
@@ -44,15 +47,16 @@ class Task extends Component<Props> {
     const params = new URLSearchParams(this.props.location.search);
     const uuid = params.get('uuid');
     if (uuid) {
-      const task = getTask(uuid);
-      this.setState({ task: getTask(uuid) });
+      const taskData = this.handleTaskLoading(uuid);
       this.setState(prevState => {
         return {
+          task: taskData.task,
+          editorState: taskData.editorState,
           currentSeconds: prevState.task.loggedTime[prevState.currentDate]
         };
       });
 
-      if (!task) {
+      if (!taskData) {
         this.props.history.push('/');
       }
 
@@ -61,23 +65,25 @@ class Task extends Component<Props> {
     }
   }
 
+  handleTaskLoading(uuid) {
+    const task = getTask(uuid);
+    return {
+      task: { ...task },
+      editorState: task.notes ? EditorState.createWithContent(convertFromRaw(task.notes)) : EditorState.createEmpty()
+    };
+  }
+
   componentWillUnmount() {
     this.saveData();
   }
 
-  editorRef = React.createRef();
-
-  sanitizeConf = {
-    allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1', 'img', 'br', 'div'],
-    allowedAttributes: { a: ['href'], img: ['src'] }
-  };
-
-  handleInputChange = (event) => {
-    const { target } = event;
-
+  // HANDLE CHANGES AND SAVING
+  handleInputChange = (editorState) => {
+    const rawState = convertToRaw(editorState.getCurrentContent());
     this.setState((prevState) => {
       return {
-        task: { ...prevState.task, notes: target.value ? target.value : '' }
+        editorState,
+        task: { ...prevState.task, notes: rawState }
       };
     });
   };
@@ -86,43 +92,7 @@ class Task extends Component<Props> {
     this.props.updateTask(this.state.task);
   };
 
-  sanitize = () => {
-    this.setState((prevState) => {
-      return {
-        task: {
-          ...prevState.task,
-          notes: prevState.task.notes ? sanitizeHtml(prevState.task.notes, this.sanitizeConf) : ''
-        }
-      };
-    });
-  };
-
-  handleTab = (e) => {
-    if (e.key === 'Tab') {
-      e.preventDefault();
-      // TODO: Implementing tab later
-      /* this.setState((prevState) => {
-        return {
-          task: { ...prevState.task, notes: `${prevState.task.notes}    ` }
-        };
-      });
-      setTimeout(() => {
-        this.setCursorAtEnd();
-      }); */
-    }
-  };
-
-
-  /* setCursorAtEnd = (el = this.editorRef.current) => {
-    const range = document.createRange();
-    const sel = window.getSelection();
-    range.selectNodeContents(el);
-    range.collapse(false);
-    sel.removeAllRanges();
-    sel.addRange(range);
-    el.focus();
-  }; */
-
+  // TIME LOGGING
   loggedTimeHandler = (seconds) => {
     this.setState((prevState) => {
       const timeToUpdate = { ...prevState.task.loggedTime };
@@ -146,12 +116,14 @@ class Task extends Component<Props> {
         currentSeconds: date === prevState.currentDate ? time : prevState.currentSeconds,
         task: {
           ...prevState.task,
-          loggedTime: timeToUpdate,
+          loggedTime: timeToUpdate
         }
       };
     });
   };
 
+
+  // BUTTONS HANDLERS
   onBack = () => {
     this.props.history.push('/');
   };
@@ -174,6 +146,7 @@ class Task extends Component<Props> {
     });
   };
 
+  // render everything
   render() {
     let loggedTime = null;
     if (Object.entries(this.state.task.loggedTime).length > 0) {
@@ -221,19 +194,13 @@ class Task extends Component<Props> {
           <span>Description:</span>
           <h3 className={styles.desc}>{this.state.task.description}</h3>
         </div>
-        <div className={styles.editor}>
-          <ContentEditable
-            innerRef={this.editorRef}
-            html={this.state.task.notes} // innerHTML of the editable div
-            disabled={false}       // use true to disable editing
-            onChange={this.handleInputChange} // handle innerHTML change
-            className={styles.area}
-            tagName="pre"
-            onFocus={() => this.toggleLogPicker(false)}
-            onKeyDown={this.handleTab}
-            onBlur={this.sanitize}
-          />
-        </div>
+        <Editor
+          editorState={this.state.editorState}
+          onEditorStateChange={this.handleInputChange}
+          wrapperClassName={styles.editorWrapper}
+          toolbarClassName={styles.toolbarEditor}
+          editorClassName={styles.editor}
+        />
         <DialogModal modalIsOpen={this.state.dialogOpen} modalTrigger={this.onDialogTrigger}
                      onConfirm={this.onDeleteTask} onDecline={() => this.onDialogTrigger(false)}/>
       </div>
@@ -241,6 +208,7 @@ class Task extends Component<Props> {
   }
 }
 
+// redux
 const mapDispatchToProps = (dispatch) => {
   return {
     updateTask: (task) => dispatch(updateTask(task)),

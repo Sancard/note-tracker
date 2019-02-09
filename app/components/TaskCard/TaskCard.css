@@ -4,7 +4,7 @@
   height: 200px;
   padding: 15px;
   border-radius: 3px;
-  background-color: #46567f;
+  background-color: #3f5765;
   box-shadow: 10px 0 54px -14px rgba(0, 0, 0, 0.75);
   cursor: pointer;
 }
@@ -16,7 +16,7 @@
   font-size: 20px;
 }
 .sectionTitle {
-  color: gainsboro;
+  color: #bdd4de;
   font-style: italic;
   font-size: 10px;
 }

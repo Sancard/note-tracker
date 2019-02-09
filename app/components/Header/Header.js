@@ -76,13 +76,16 @@ class Header extends React.Component<Props> {
     return (
       <div className={styles.header}>
         <div className={styles.mainButton}>
-          <button type="button" disabled={this.props.location.pathname === '/'} onClick={this.onBrandClick}>
+          {/*<button type="button" disabled={this.props.location.pathname === '/'} onClick={this.onBrandClick}>
             <img src={logo} alt="NoteTracker Icon"/>
+          </button>*/}
+          <button disabled={this.props.location.pathname === '/'} className={styles.appName} onClick={this.onBrandClick}>
+            <span>Note</span><span>Tracker</span>
           </button>
-          <div className={styles.currentDate}>
-            <p>{moment().format('D. MMM Y')}</p>
-            <p>{this.state.currentTime}</p>
-          </div>
+        </div>
+        <div className={styles.currentDate}>
+          <p>{moment().format('D. MMM Y')}</p>
+          <p>{this.state.currentTime}</p>
         </div>
         <div className={styles.actionButtons}>
           <div className={styles.actionButton} onClick={this.minimizeApp}><i className="fas fa-window-minimize"></i>

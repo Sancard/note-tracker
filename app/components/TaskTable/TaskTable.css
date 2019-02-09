@@ -19,7 +19,7 @@
 .list table thead td, th {
   padding: 15px 10px;
   font-size: 10px;
-  color: #ccc;
+  color: #bdd4de;
 }
 .list table tbody td,th {
   padding: 15px 10px;
@@ -28,6 +28,6 @@
 }
 
 .list table tbody tr:hover {
-  background-color: #46567f;
+  background-color: rgba(239, 239, 239, 0.5);
   cursor: pointer;
 }

@@ -1,9 +1,10 @@
 .picker {
-  background-color: #232931;
+  background-color: #2b3a42;
   position: absolute;
   left: 255px;
   width: 300px;
   top: 60px;
+  z-index: 10;
 }
 
 .button {
