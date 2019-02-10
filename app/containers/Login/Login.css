@@ -1,0 +1,42 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+.formContainer > img {
+  width: 150px;
+  height: 150px;
+}
+.formContainer > h3 {
+  font-weight: 500;
+}
+.formContainer > h3 > span {
+  color: #52cc1f;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form > input {
+  margin: 10px;
+  border: none;
+  padding: 15px;
+  width: 350px;
+  outline: none;
+  background: #3f5765;
+  color: white;
+}
+.form > input::placeholder {
+  color: #dddddd;
+}
+.actionLink > a {
+  color: #52cc1f;
+  cursor: pointer;
+}
+.actionLink > a:hover {
+  color: #4ecca3;
+}

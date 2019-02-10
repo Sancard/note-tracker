@@ -2,5 +2,6 @@
   "HOME": "/",
   "TASK": "/task",
   "TASK_CREATOR": "/taskcreator",
-  "PROJECT_CREATOR": "/projectcreator"
+  "PROJECT_CREATOR": "/projectcreator",
+  "LOGIN": "/login"
 }

@@ -1,15 +1,18 @@
 import React from 'react';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 import routes from './constants/routes';
 import App from './containers/App';
-import Tasks from './containers/Viewer/Viewer';
+import Viewer from './containers/Viewer/Viewer';
 import Task from './containers/Task/Task';
+import Login from './containers/Login/Login';
+import requireAuth from './hoc/checkAuth';
 
 export default () => (
   <App>
     <Switch>
-      <Route path={routes.TASK} component={Task} />
-      <Route path={routes.HOME} component={Tasks} />
+      <Route path={routes.LOGIN} component={Login} />
+      <Route path={routes.TASK} component={requireAuth(Task)} />
+      <Route path={routes.HOME} component={requireAuth(Viewer)} />
     </Switch>
   </App>
 );

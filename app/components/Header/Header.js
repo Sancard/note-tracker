@@ -7,7 +7,7 @@ import electron from 'electron';
 import styles from './Header.css';
 import * as routes from '../../constants/routes';
 import { appUpdateProjectUuid } from '../../store/actions';
-import logo from '../../assets/images/icon.png'
+import firebase from '../../config/firebase';
 
 type Props = {
   history: {
@@ -23,10 +23,12 @@ class Header extends React.Component<Props> {
   _isMounted = false;
 
   state = {
-    currentTime: moment().format('H:mm:ss')
+    currentTime: moment().format('H:mm:ss'),
+    userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
   };
 
   timeInterval = null;
+
 
   componentDidMount() {
     this._isMounted = true;
@@ -71,14 +73,10 @@ class Header extends React.Component<Props> {
     }
   };
 
-
   render() {
     return (
       <div className={styles.header}>
         <div className={styles.mainButton}>
-          {/*<button type="button" disabled={this.props.location.pathname === '/'} onClick={this.onBrandClick}>
-            <img src={logo} alt="NoteTracker Icon"/>
-          </button>*/}
           <button disabled={this.props.location.pathname === '/'} className={styles.appName} onClick={this.onBrandClick}>
             <span>Note</span><span>Tracker</span>
           </button>
@@ -86,6 +84,7 @@ class Header extends React.Component<Props> {
         <div className={styles.currentDate}>
           <p>{moment().format('D. MMM Y')}</p>
           <p>{this.state.currentTime}</p>
+          <p className={styles.userName}>{this.state.userInfo ? this.state.userInfo.email : null}</p>
         </div>
         <div className={styles.actionButtons}>
           <div className={styles.actionButton} onClick={this.minimizeApp}><i className="fas fa-window-minimize"></i>
