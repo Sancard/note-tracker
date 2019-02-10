@@ -207,6 +207,7 @@
     "electron-store": "^2.0.0",
     "electron-updater": "^3.2.3",
     "history": "^4.7.2",
+    "immutable": "^4.0.0-rc.12",
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.23",
     "react": "^16.6.3",
