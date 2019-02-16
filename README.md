@@ -5,9 +5,9 @@
 
 NoteTracker is a simple note-taking app merged with time tracking app.. ehm what?
 
-Yes. Maybe you are a developer, designer or someone who needs to track their time spent on a certain task, but also you love to make notes, TO-DOs or just writing ideas down, so you will not forget them later. NoteTracker has got you covered!
+Yes. Maybe you are a developer, a designer or someone who needs to track their time spent on a certain task, but you also love to take notes, TO-DOs or just writing ideas down, so you will not forget them later. NoteTracker has got you covered!
 
-With Rich Text Editor you are free to create beautiful notes as you like and also you don't have to worry about time tracking! Everything is set up automatically for you! Just create project, task and focus on your work!
+With Rich Text Editor you are free to create beautiful notes as you like and also you don't have to worry about the time tracking! Everything is set up automatically for you! Just create a project, task and focus on your work!
 
 ![image](https://user-images.githubusercontent.com/24323087/52904720-55c05d80-3230-11e9-9586-1cbc472c4b26.png)
 
@@ -26,12 +26,12 @@ With Rich Text Editor you are free to create beautiful notes as you like and als
 
 ## Technologies
 
-The application is built with [Electron](https://electronjs.org/) and [React](https://reactjs.org/) with little help from [Electron React Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate).
+The application is built with [Electron](https://electronjs.org/) and [React](https://reactjs.org/) with a little help from [Electron React Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate).
 The back-end is provided by [Firebase](https://firebase.google.com/).
 
 Also, multiple 3rd party packages were used. Check out `package.json`, if you are interested.
 
-But shout out to [jpuri/react-draft-wysiwyg](https://github.com/jpuri/react-draft-wysiwyg) for creating this amazing wrapper around [DraftJS](https://draftjs.org/), which really made my life easier with setting up a text editor.
+But shout out to [jpuri/react-draft-wysiwyg](https://github.com/jpuri/react-draft-wysiwyg) for creating this amazing wrapper around [DraftJS](https://draftjs.org/), which really made my life easier with setting up the text editor.
 
 ## Usage
 ### Install dependencies
