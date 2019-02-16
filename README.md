@@ -29,6 +29,10 @@ With Rich Text Editor you are free to create beautiful notes as you like and als
 Application is build with [Electron](https://electronjs.org/) and [React](https://reactjs.org/) with little help from [Electron React Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate).
 Back-end is provided by [Firebase](https://firebase.google.com/).
 
+Also multiple 3rd party packages were used. Check out `package.json`, if you are interested.
+
+But shout out to [jpuri/react-draft-wysiwyg](https://github.com/jpuri/react-draft-wysiwyg) for creating this amazing wrapper around [DraftJS](https://draftjs.org/), which really made my life easier with setting up text editor.
+
 ## Usage
 ### Install dependencies
 ```bash
