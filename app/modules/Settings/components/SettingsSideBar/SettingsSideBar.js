@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './SettingsSideBar.css';
 
 const SettingsSideBar = (props) => {
-  console.log(props);
   return (
     <div className={styles.container}>
       <p onClick={props.goBack.click}><i className="fas fa-arrow-left"/>&nbsp;&nbsp;&nbsp;Go Back</p>

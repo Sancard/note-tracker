@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router';
 import routes from './constants/routes';
-import App from './containers/App';
-import Viewer from './containers/Viewer/Viewer';
-import Task from './containers/Task/Task';
-import Login from './containers/Login/Login';
+import App from './modules/App';
+import Viewer from './modules/Viewer/Viewer';
+import Task from './modules/Task/Task';
+import Login from './modules/Login/Login';
 import requireAuth from './hoc/checkAuth';
-import Settings from './containers/Settings/Settings';
+import Settings from './modules/Settings/Settings';
 
 export default () => (
   <App>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../config/firebase';
 import routes from '../../constants/routes';
 import styles from './Login.css';
-import NoteButton from '../../components/NoteButton/NoteButton';
+import NoteButton from '../../shared/NoteButton/NoteButton';
 import logo from '../../assets/images/logo-dark.png'
 import withErrorHandling from '../../hoc/withErrorHandling';
 

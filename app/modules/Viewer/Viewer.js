@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 // import TaskCard from '../../components/TaskCard/TaskCard';
 import * as styles from './Viewer.css';
 import routes from '../../constants/routes';
-import TaskTable from '../../components/TaskTable/TaskTable';
-import { appUpdateProjectUuid, projectDeleteProject } from '../../store/actions';
+import TaskTable from './components/TaskTable/TaskTable';
+import { appUpdateProjectUuid, projectDeleteProject } from '../../store/actions/index';
 import CreatorsModals from '../CreatorsModals/CreatorsModals';
-import DialogModal from '../../components/DialogModal/DialogModal';
+import DialogModal from '../../shared/DialogModal/DialogModal';
 import { sumAllTasksTime } from '../../utils/utilities';
-import FAB from '../../components/FAB/FAB';
+import FAB from '../../shared/FAB/FAB';
 
 type Props = {
   tasks: {

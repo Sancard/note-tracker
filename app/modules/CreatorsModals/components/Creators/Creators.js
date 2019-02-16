@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import * as styles from './Creators.css';
-import NoteButton from '../NoteButton/NoteButton';
+import NoteButton from '../../../../shared/NoteButton/NoteButton';
 
 type taskProps = {
   modalTrigger: () => void,

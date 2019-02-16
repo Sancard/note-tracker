@@ -5,7 +5,7 @@ import routes from '../constants/routes';
 import { connect } from 'react-redux';
 import { projectLoadFromCloud, taskLoadFromCloud, userSaveUser } from '../store/actions';
 import { COLLECTION_PROJECTS, COLLECTION_TASKS } from '../config/firebase-env';
-import Loader from '../components/Loader/Loader';
+import Loader from '../shared/Loader/Loader';
 
 
 export default function requireAuth(Component) {

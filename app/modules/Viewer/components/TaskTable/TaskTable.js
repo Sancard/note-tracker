@@ -1,6 +1,6 @@
 import React from 'react';
 import * as styles from './TaskTable.css';
-import { sumLoggedTime } from '../../utils/utilities';
+import { sumLoggedTime } from '../../../../utils/utilities';
 
 type Props = {
   data: Array<{

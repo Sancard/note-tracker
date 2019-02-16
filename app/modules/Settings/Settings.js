@@ -3,7 +3,7 @@ import firebase from '../../config/firebase';
 import {connect} from 'react-redux';
 import styles from './Settings.css';
 import { userLogoutUser } from '../../store/actions/user';
-import SettingsSideBar from '../../components/SettingsSideBar/SettingsSideBar';
+import SettingsSideBar from './components/SettingsSideBar/SettingsSideBar';
 
 class Settings extends Component {
 

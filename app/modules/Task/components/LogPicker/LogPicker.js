@@ -3,7 +3,7 @@ import TimePicker from "react-times";
 import DayPicker from "react-day-picker";
 import moment from 'moment';
 import styles from './LogPicker.css';
-import NoteButton from '../NoteButton/NoteButton';
+import NoteButton from '../../../../shared/NoteButton/NoteButton';
 
 type Props = {
   addTimeHandler: () => void

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styles from './TaskCard.css';
-import { sumLoggedTime } from '../../utils/utilities';
+import { sumLoggedTime } from '../../../../utils/utilities';
 
 type Props = {
   name: string,

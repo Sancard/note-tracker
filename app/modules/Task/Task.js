@@ -5,12 +5,12 @@ import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import moment from 'moment';
 import { Editor } from 'react-draft-wysiwyg';
 import { getTask } from '../../utils/storage';
-import Timer from '../../components/Timer/Timer';
+import Timer from '../../shared/Timer/Timer';
 import { deleteTask, updateTask } from '../../store/actions';
 import * as styles from './Task.css';
 import { sumLoggedTime } from '../../utils/utilities';
-import DialogModal from '../../components/DialogModal/DialogModal';
-import LogPicker from '../../components/LogPicker/LogPicker';
+import DialogModal from '../../shared/DialogModal/DialogModal';
+import LogPicker from './components/LogPicker/LogPicker';
 
 type Props = {
   location: {
