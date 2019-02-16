@@ -54,7 +54,7 @@ export const config = {
 
 ```
 
-## Run application in development
+### Run application in development
 ```bash
 yarn dev
 ```
