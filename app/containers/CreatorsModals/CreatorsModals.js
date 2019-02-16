@@ -22,33 +22,40 @@ class CreatorsModals extends Component<Props> {
     valid: false,
     isProject: true,
     projectUuid: null,
-    project: {
-      uuid: guidGenerator(),
-      name: '',
-      tag: '',
-      createdAt: Date.now()
-    },
-    task: {
-      uuid: guidGenerator(),
-      projectUuid: null,
-      name: '',
-      estimatedHours: null,
-      description: '',
-      loggedTime: [],
-      createdAt: Date.now(),
-      notes: ''
-    }
+    project: null,
+    task: null
   };
 
+
   componentWillReceiveProps(props) {
-    this.setState({ modalIsOpen: props.modalIsOpen, projectUuid: props.appState.projectUuid, isProject: !props.appState.projectUuid });
+    this.setState({
+      modalIsOpen: props.modalIsOpen,
+      projectUuid: props.appState.projectUuid,
+      isProject: !props.appState.projectUuid,
+      project: {
+        uuid: guidGenerator(),
+        name: '',
+        tag: '',
+        createdAt: Date.now()
+      },
+      task: {
+        uuid: guidGenerator(),
+        projectUuid: null,
+        name: '',
+        estimatedHours: null,
+        description: '',
+        loggedTime: [],
+        createdAt: Date.now(),
+        notes: ''
+      }
+    });
   }
 
   formsSnap = {
     name: ''
   };
 
-
+  // INPUT HANDLER
   handleInputChange = (event) => {
     if (event.target.name === 'name') {
       this.formsSnap.name = event.target.value;
@@ -74,6 +81,7 @@ class CreatorsModals extends Component<Props> {
 
   };
 
+  // CREATE HANDLERS
   onCreateProject = () => {
     if (!this.state.valid) {
       return;
@@ -87,6 +95,7 @@ class CreatorsModals extends Component<Props> {
       return;
     }
     this.props.createNewTask(this.state.task);
+    this.setState({ task: null, project: null });
     this.props.modalTrigger(false);
   };
 

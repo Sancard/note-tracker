@@ -36,6 +36,7 @@ class Task extends Component<Props> {
     currentDate: moment().format('D-M-Y'),
     currentSeconds: 0,
     editorState: null,
+    deleting: false,
     task: {
       notes: '',
       loggedTime: [],
@@ -74,7 +75,9 @@ class Task extends Component<Props> {
   }
 
   componentWillUnmount() {
-    this.saveData();
+    if (!this.state.deleting) {
+      this.saveData();
+    }
   }
 
   // HANDLE CHANGES AND SAVING
@@ -129,8 +132,10 @@ class Task extends Component<Props> {
   };
 
   onDeleteTask = () => {
-    this.props.deleteTask(this.state.task);
-    this.props.history.push('/');
+    this.setState({deleting: true}, () => {
+      this.props.deleteTask(this.state.task);
+      this.props.history.push('/');
+    });
   };
 
   onDialogTrigger = (state) => {
@@ -200,6 +205,7 @@ class Task extends Component<Props> {
           wrapperClassName={styles.editorWrapper}
           toolbarClassName={styles.toolbarEditor}
           editorClassName={styles.editor}
+          onFocus={() => this.setState({showLogPicker: false})}
         />
         <DialogModal modalIsOpen={this.state.dialogOpen} modalTrigger={this.onDialogTrigger}
                      onConfirm={this.onDeleteTask} onDecline={() => this.onDialogTrigger(false)}/>

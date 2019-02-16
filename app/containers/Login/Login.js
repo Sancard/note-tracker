@@ -4,7 +4,12 @@ import routes from '../../constants/routes';
 import styles from './Login.css';
 import NoteButton from '../../components/NoteButton/NoteButton';
 import logo from '../../assets/images/logo-dark.png'
+import withErrorHandling from '../../hoc/withErrorHandling';
 
+
+
+
+const DivWithErrorHandling = withErrorHandling(({children}) => <div>{children}</div>);
 class Login extends Component {
   state = {
     email: '',
@@ -12,7 +17,9 @@ class Login extends Component {
     passwordAgain: '',
     passwordsMatch: true,
     valid: false,
-    isSignUp: false
+    isSignUp: false,
+    showError: false,
+    errorMessage: ''
   };
 
   formSnap = {
@@ -28,10 +35,7 @@ class Login extends Component {
         this.props.history.push(routes.HOME);
       }
     }).catch(err => {
-      const errorCode = err.code;
-      const errorMessage = err.message;
-
-      console.error(errorCode, errorMessage);
+      this.handleError(err)
     })
   };
 
@@ -43,11 +47,7 @@ class Login extends Component {
       }
     }).catch((error) => {
       // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-
-      console.error(errorCode, errorMessage);
-
+      this.handleError(error)
     });
   };
 
@@ -74,39 +74,48 @@ class Login extends Component {
     }));
   };
 
+  handleError = (err) => {
+    this.setState({
+      errorMessage: err.message,
+      showError: true
+    })
+  };
+
 
   render() {
     return (
-      <div className={styles.formContainer}>
-        <img src={logo} alt="NoteTracker Icon"/>
-        <h3>{this.state.isSignUp ? 'Sign up' : 'Sign in'} to Note<span>Tracker</span></h3>
-        <form className={styles.form}>
-          <input type="email"
-                 name="email"
-                 required
-                 onChange={this.handleInputChange}
-                 placeholder="E-mail"/>
-          <input type="password"
-                 name="password"
-                 required
-                 onChange={this.handleInputChange}
-                 placeholder="Password"/>
-          {this.state.isSignUp ? <input type="password"
-                                        name="passwordAgain"
-                                        required
-                                        onChange={this.handleInputChange}
-                                        placeholder="Password Again" /> : null}
-          {this.state.isSignUp && !this.state.passwordsMatch && this.formSnap.passwordAgain ? <span>Passwords does not match.</span> : null}
-          <NoteButton padding="15px 75px" type="button" disabled={!this.state.valid}
-                      onClick={this.handleClick}>
-            {this.state.isSignUp ? 'Sign Up' : 'Sign In'}
-          </NoteButton>
-        </form>
-        {this.state.isSignUp ?  <p className={styles.actionLink}>
-            Already have an account? Sign in <a onClick={() => this.setState({isSignUp: false})}>here.</a></p> :
-          <p className={styles.actionLink}>
-            Don't have an account? Sign up <a onClick={() => this.setState({isSignUp: true, valid: false})}>here.</a></p>}
-      </div>
+      <DivWithErrorHandling showError={this.state.showError} message={this.state.errorMessage}>
+        <div className={styles.formContainer}>
+          <img src={logo} alt="NoteTracker Icon"/>
+          <h3>{this.state.isSignUp ? 'Sign up' : 'Sign in'} to Note<span>Tracker</span></h3>
+          <form className={styles.form}>
+            <input type="email"
+                   name="email"
+                   required
+                   onChange={this.handleInputChange}
+                   placeholder="E-mail"/>
+            <input type="password"
+                   name="password"
+                   required
+                   onChange={this.handleInputChange}
+                   placeholder="Password"/>
+            {this.state.isSignUp ? <input type="password"
+                                          name="passwordAgain"
+                                          required
+                                          onChange={this.handleInputChange}
+                                          placeholder="Password Again" /> : null}
+            {this.state.isSignUp && !this.state.passwordsMatch && this.formSnap.passwordAgain ? <span>Passwords does not match.</span> : null}
+            <NoteButton padding="15px 75px" type="button" disabled={!this.state.valid}
+                        onClick={this.handleClick}>
+              {this.state.isSignUp ? 'Sign Up' : 'Sign In'}
+            </NoteButton>
+          </form>
+          {this.state.isSignUp ?  <p className={styles.actionLink}>
+              Already have an account? Sign in <a onClick={() => this.setState({isSignUp: false})}>here.</a></p> :
+            <p className={styles.actionLink}>
+              Don't have an account? Sign up <a onClick={() => this.setState({isSignUp: true, valid: false})}>here.</a></p>}
+        </div>
+      </DivWithErrorHandling>
     );
   }
 }

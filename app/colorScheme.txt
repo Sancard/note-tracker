@@ -1,6 +1,7 @@
-#2b3a42
-#52cc1f
-#bdd4de
-#3f5765
-#efefef
-#4ecca3
+#2b3a42 - main color
+#52cc1f - logo green
+#bdd4de - light blue
+#3f5765 - lighter main color
+#efefef - white font color
+#4ecca3 - hover button color
+#ff7272 - danger buttons color

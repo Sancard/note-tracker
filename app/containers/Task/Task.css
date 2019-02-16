@@ -40,6 +40,7 @@
   max-width: 100%;
   background-color: #2c2828;
   padding: 10px;
+  z-index: 0 !important;
 }
 .toolbarEditor {
   width: 70%;
@@ -51,26 +52,6 @@
   background-color: #fff;
   border: none;
 }
-
-/*
-.editor .area {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  margin: 0;
-  font-family: inherit;
-  width: 84vw;
-  height: 93vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  resize: none;
-  background-color: #2c2828;
-  color: white;
-  border: none;
-  padding: 15px;
-  box-sizing: border-box;
-  outline: none;
-}
-*/
 
 .editor .area img {
   width: 300px;

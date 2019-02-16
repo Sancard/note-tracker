@@ -59,3 +59,8 @@
   font-weight: 500;
   font-size: 10px;
 }
+.leftActionbar {
+  display: flex;
+  margin: 10px 5px;
+  align-items: center;
+}

@@ -1,4 +1,4 @@
-import { TASK_DELETE_TASK, TASK_NEW_TASK, TASK_UPDATE_TASK } from '../actions/actionTypes';
+import { TASK_DELETE_TASK, TASK_LOADING_FROM_CLOUD, TASK_NEW_TASK, TASK_UPDATE_TASK } from '../actions/actionTypes';
 import { saveTask, taskStore, convertValues, deleteTask } from '../../utils/storage';
 
 const initialState = {
@@ -31,6 +31,11 @@ const reducer = (state = initialState, action) => {
       deleteTask(action.task.uuid);
       const tasks = state.tasks.filter((el) => el.uuid !== action.task.uuid);
       return {...state, tasks}
+    }
+    case TASK_LOADING_FROM_CLOUD: {
+      const tasks = state.tasks.filter((el) => el.uuid !== action.task.uuid).concat(action.task);
+      saveTask(action.task.uuid, action.task);
+      return { ...state, tasks };
     }
     default: {
       return state;

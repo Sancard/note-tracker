@@ -7,7 +7,6 @@ import electron from 'electron';
 import styles from './Header.css';
 import * as routes from '../../constants/routes';
 import { appUpdateProjectUuid } from '../../store/actions';
-import firebase from '../../config/firebase';
 
 type Props = {
   history: {
@@ -23,8 +22,7 @@ class Header extends React.Component<Props> {
   _isMounted = false;
 
   state = {
-    currentTime: moment().format('H:mm:ss'),
-    userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+    currentTime: moment().format('H:mm:ss')
   };
 
   timeInterval = null;
@@ -50,7 +48,7 @@ class Header extends React.Component<Props> {
   };
 
   onBrandClick = () => {
-    if(this.props.location.pathname !== '/') {
+    if (this.props.location.pathname !== '/') {
       this.props.updateProjectUuid(null);
       this.props.history.push('/');
     }
@@ -73,35 +71,47 @@ class Header extends React.Component<Props> {
     }
   };
 
+  goToSettings = () => {
+    this.props.history.push(routes.SETTINGS);
+  };
+
   render() {
     return (
       <div className={styles.header}>
         <div className={styles.mainButton}>
-          <button disabled={this.props.location.pathname === '/'} className={styles.appName} onClick={this.onBrandClick}>
+          <button disabled={this.props.location.pathname === '/'} className={styles.appName}
+                  onClick={this.onBrandClick}>
             <span>Note</span><span>Tracker</span>
           </button>
         </div>
         <div className={styles.currentDate}>
           <p>{moment().format('D. MMM Y')}</p>
           <p>{this.state.currentTime}</p>
-          <p className={styles.userName}>{this.state.userInfo ? this.state.userInfo.email : null}</p>
         </div>
         <div className={styles.actionButtons}>
-          <div className={styles.actionButton} onClick={this.minimizeApp}><i className="fas fa-window-minimize"></i>
+          {this.props.userStore.isLogged ?
+            <div className={styles.actionButton} onClick={this.goToSettings}><i className="fas fa-cog"/></div> : null}
+          <div className={styles.actionButton} onClick={this.minimizeApp}><i className="fas fa-window-minimize"/>
           </div>
-          <div className={styles.actionButton} onClick={this.maximizeApp}><i className="fas fa-window-maximize"></i>
+          <div className={styles.actionButton} onClick={this.maximizeApp}><i className="fas fa-window-maximize"/>
           </div>
-          <div className={styles.actionButton} onClick={this.closeApp}><i className="fas fa-times"></i></div>
+          <div className={styles.actionButton} onClick={this.closeApp}><i className="fas fa-times"/></div>
         </div>
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userStore: state.userStore
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     updateProjectUuid: (projectUuid) => dispatch(appUpdateProjectUuid(projectUuid))
-  }
+  };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(Header));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

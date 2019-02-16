@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import TaskCard from '../../components/TaskCard/TaskCard';
+// import TaskCard from '../../components/TaskCard/TaskCard';
 import * as styles from './Viewer.css';
 import routes from '../../constants/routes';
 import TaskTable from '../../components/TaskTable/TaskTable';
@@ -41,6 +41,10 @@ class Viewer extends Component<Props> {
   };
 
 
+  /*
+  * Lifecycle methods
+  * handles new props
+  * */
   componentWillMount() {
     this.handleNewProps(this.props);
   }
@@ -49,7 +53,12 @@ class Viewer extends Component<Props> {
     this.handleNewProps(props);
   }
 
-
+  /**
+   * Decide which view is displayed.
+   * Based on projectUuid from redux store -> projectUuid is available = show project's tasks,
+   * else show projects table
+   * @param props
+   * */
   handleNewProps(props) {
     if (props.appState.projectUuid) {
       const data = props.tasks.tasks.filter((el) => {
@@ -71,28 +80,36 @@ class Viewer extends Component<Props> {
     }
   }
 
+
+  /*
+  * Handles action after clicking on project/task record
+  * isProjects == true -> updates projectUuid in redux store, gets project's data
+  * and set view on task
+  * @param {string} key - projectUuid
+  * */
   onSelectedRow = (key) => {
     if (this.state.isProjects) {
-
       this.props.updateProjectUuid(key);
-
       const data = this.setData(key);
-
       this.setState({ isProjects: false, data });
     } else {
       this.props.history.push(routes.TASK + '?uuid=' + key);
     }
   };
 
-  getProjectData = () => {
-    return this.props.projects.projects.filter((el) => {
-      return el.uuid === this.props.appState.projectUuid
-    });
-  };
-
+  /**
+   * DATA 'getters/setters'
+   * methods for setting/loading/filtering data
+   * */
   setData = (key) => {
     return this.props.tasks.tasks.filter((el) => {
       return el.projectUuid === key;
+    });
+  };
+
+  getProjectData = () => {
+    return this.props.projects.projects.filter((el) => {
+      return el.uuid === this.props.appState.projectUuid;
     });
   };
 
@@ -114,14 +131,9 @@ class Viewer extends Component<Props> {
     }
   };
 
-  toggleStyle = () => {
-    this.setState(prevState => {
-      return {
-        listStyle: !prevState.listStyle
-      };
-    });
-  };
-
+  /*
+  * UI methods for firing actions (modals,dialogs..)
+  * */
   onModalTrigger = (state) => {
     this.setState({ modalIsOpen: state });
   };
@@ -130,10 +142,17 @@ class Viewer extends Component<Props> {
     this.setState({ dialogOpen: state });
   };
 
-
   onBack = () => {
     this.props.updateProjectUuid(null);
     this.setState({ isProjects: true, data: this.props.projects.projects, dialogOpen: false, modalIsOpen: false });
+  };
+
+  toggleStyle = () => {
+    this.setState(prevState => {
+      return {
+        listStyle: !prevState.listStyle
+      };
+    });
   };
 
   onDeleteProject = () => {
@@ -142,15 +161,20 @@ class Viewer extends Component<Props> {
     this.onBack();
   };
 
+
+  // RENDER VIEW
+
   render() {
-    let tasksCard, taskGrid, taskTable, projectInfo;
+    // let tasksCard, taskGrid, taskTable, projectInfo;
+    let taskTable, projectInfo;
 
     // create view based on state
     if (this.state.listStyle) {
       taskTable = <div className={styles.taskTable}>
         <TaskTable isProjects={this.state.isProjects} data={this.state.data} click={this.onSelectedRow}/>
       </div>;
-    } else { // grid style
+    }
+    /*else { // grid style
       tasksCard = this.state.data.map((el) =>
         (
           <TaskCard {...el} isProjects={this.state.isProjects} key={el.uuid} click={() => this.onSelectedRow(el.uuid)}/>
@@ -158,14 +182,16 @@ class Viewer extends Component<Props> {
       );
       taskGrid = <div className={styles.tasksGrid}>{tasksCard.length > 0 ? tasksCard.reverse() : <p
         className={styles.emptyTasks}>No tasks found. Hurry up and create some!</p>}</div>;
-    }
+    }*/
 
 
-    const displayTasks = this.state.listStyle ? taskTable : taskGrid;
+    // const displayTasks = this.state.listStyle ? taskTable : taskGrid;
+    const displayTasks = taskTable;
 
-    const listStyleToggleButtonClass = this.state.listStyle ? 'fas fa-th-large' : 'fas fa-list-ul';
+    // const listStyleToggleButtonClass = this.state.listStyle ? 'fas fa-th-large' : 'fas fa-list-ul';
 
-    if(!this.state.isProjects) {
+    // set project data to task header, when tasks view is displayed
+    if (!this.state.isProjects) {
       const data = this.getProjectData()[0];
       projectInfo = (
         <div className={styles.projectInfo}>
@@ -178,12 +204,14 @@ class Viewer extends Component<Props> {
     return (
       <React.Fragment>
         <div className={styles.header}>
-          <div className={styles.buttons}>
-            {!this.state.isProjects ? <button type="button" onClick={this.onBack}><i
-              className="fas fa-long-arrow-alt-left"/></button> : null}
-          </div>
-          <div className={styles.search}>
-            <input type="text" placeholder="Search..." onChange={this.filterData}/>
+          <div className={styles.leftActionbar}>
+            <div className={styles.buttons}>
+              {!this.state.isProjects ? <button type="button" onClick={this.onBack}><i
+                className="fas fa-long-arrow-alt-left"/></button> : null}
+            </div>
+            <div className={styles.search}>
+              <input type="text" placeholder="Search..." onChange={this.filterData}/>
+            </div>
           </div>
           <div className={styles.buttons}>
             {/*<button type="button" onClick={this.toggleStyle}><i className={listStyleToggleButtonClass}/></button>*/}
