@@ -2,7 +2,7 @@
   "name": "note-tracker",
   "productName": "NoteTracker",
   "version": "0.2.6",
-  "description": "Note Tracker is a simple task manager to track your time and thoughts.",
+  "description": "NoteTracker is a simple note-taking app merged with time tracking app.. ehm what?..",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",

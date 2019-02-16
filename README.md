@@ -54,6 +54,11 @@ export const config = {
 
 ```
 
+## Run application in development
+```bash
+yarn dev
+```
+
 ### Packaging app
 ```bash
 yarn package
