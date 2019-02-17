@@ -53,7 +53,7 @@ class Task extends Component<Props> {
         return {
           task: taskData.task,
           editorState: taskData.editorState,
-          currentSeconds: prevState.task.loggedTime[prevState.currentDate]
+          currentSeconds: taskData.task.loggedTime[prevState.currentDate]
         };
       });
 
