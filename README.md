@@ -22,7 +22,7 @@ With Rich Text Editor you are free to create beautiful notes as you like and als
 - [License](#license)
 
 ## Download
-[Windows](https://notetracker.samuelfarkas.eu/NoteTrackerSetup0.2.6.exe) | Mac *(coming soon)*
+[Windows](https://notetracker.samuelfarkas.eu/NoteTrackerSetup0.2.6.exe) | [Mac](https://notetracker.samuelfarkas.eu/NoteTracker0.2.6.dmg) | [Android](https://play.google.com/store/apps/details?id=com.codealth.notetrackerlite)
 
 ## Technologies
 
