@@ -1,7 +1,9 @@
 # NoteTracker 
+
+[![Project Status: Abandoned – Initial development has started, but there has not yet been a stable, usable release; the project has been abandoned and the author(s) do not intend on continuing development.](https://www.repostatus.org/badges/latest/abandoned.svg)](https://www.repostatus.org/#abandoned)
+
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
-
 
 NoteTracker is a simple note-taking app merged with time tracking app.. ehm what?
 
@@ -11,7 +13,7 @@ With Rich Text Editor you are free to create beautiful notes as you like and als
 
 ![image](https://user-images.githubusercontent.com/24323087/52904720-55c05d80-3230-11e9-9586-1cbc472c4b26.png)
 
-*NoteTracker is still a WIP project. If you are using it for your work I'm really happy you like it, but bear in mind your data could be damaged anytime with new updates. That's why auto-updating is not set up yet and if you want to update your app, you have to download the new installer and update it manually.*
+*NoteTracker is still a WIP (not anymore) project. If you are using it for your work I'm really happy you like it, but bear in mind your data could be damaged anytime with new updates. That's why auto-updating is not set up yet and if you want to update your app, you have to download the new installer and update it manually.*
 
 ## Table of contents
 
